@@ -15,7 +15,7 @@ export const authRoutes = [
     }
 
 ]
-export const publicRotes = [
+export const publicRoutes = [
     {
         path: LOGIN_ROUTE,
         Component: Auth
@@ -23,6 +23,10 @@ export const publicRotes = [
     {
         path: REGISTRATION_ROUTE,
         Component: Auth
+    },
+    {
+        path: USERLIST_ROUTE,
+        Component: UserList
     }
 
 ]
