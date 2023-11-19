@@ -1,8 +1,7 @@
 
 import React from "react";
-import {Switch , Route} from 'react-router-dom';
+import {Switch , Route, Redirect} from 'react-router-dom';
 import { authRoutes, publicRoutes } from "../routes";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import { USERLIST_ROUTE } from "../utils/consts";
 const AppRouter = () => {
     const isAuth = false;
