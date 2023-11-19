@@ -2,6 +2,8 @@
 import React from "react";
 import {Switch , Route} from 'react-router-dom';
 import { authRoutes, publicRoutes } from "../routes";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import { USERLIST_ROUTE } from "../utils/consts";
 const AppRouter = () => {
     const isAuth = false;
     return (
@@ -12,6 +14,8 @@ const AppRouter = () => {
              {publicRoutes.map(({ path, Component }) => 
                 <Route key={path} path={path} component={Component} exact/>
             )}
+            <Redirect to={USERLIST_ROUTE}/> {/*Если перейти на не существующую страницу -> редерект на дефолт*/}
+            
         </Switch>
 
     );
