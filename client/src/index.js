@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index';
 import App from './App.js';
 import UserStore from './store/UserStore.js';
+import OtdelStore from './store/OtdelStore.js';
 
 
 
@@ -19,7 +20,8 @@ ReactDOM.render(
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(  
   <Context.Provider value={{
-      user: new UserStore()
+      user: new UserStore(),
+      otdel : new OtdelStore()
   }}>
     <App />
   </Context.Provider>
