@@ -12,12 +12,12 @@ import {observer} from 'mobx-react-lite'
     const {user} = useContext(Context)
     return (
       <Navbar bg="dark" data-bs-theme="dark">
-         <Container>
+         <Container >
         <NavLink style={{color: 'white'}} to={USERLIST_ROUTE}>My Project</NavLink> 
         {user.isAuth ?
-        <Nav className="ml-auto" style={{color:'white'}}>
+        <Nav className="mr-2" style={{color:'white'}}>
           <Button variant={"outline-light"} >Админ панель</Button>
-          <Button variant={"outline-light"} className="ml-1" onClick={() => user.setIsAuth(false)}>Выйти</Button>
+          <Button variant={"outline-light"} style={{marginLeft: 3}} onClick={() => user.setIsAuth(false)}>Выйти</Button>
         </Nav>
         :
         <Nav className="ml-auto" style={{color:'white'}}>
