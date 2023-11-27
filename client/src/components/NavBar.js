@@ -17,7 +17,7 @@ import {observer} from 'mobx-react-lite'
         {user.isAuth ?
         <Nav className="mr-2" style={{color:'white'}}>
           <Button variant={"outline-light"} >Админ панель</Button>
-          <Button variant={"outline-light"} style={{marginLeft: 3}} onClick={() => user.setIsAuth(false)}>Выйти</Button>
+          <Button variant={"outline-light"} style={{marginLeft: "20px"}} onClick={() => user.setIsAuth(false)}>Выйти</Button>
         </Nav>
         :
         <Nav className="ml-auto" style={{color:'white'}}>
