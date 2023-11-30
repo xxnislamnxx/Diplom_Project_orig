@@ -2,6 +2,10 @@ import React from "react";
 import { Button, Card, Container, Form, Row } from "react-bootstrap";
 import { NavLink, useLocation } from "react-router-dom/cjs/react-router-dom";
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/consts";
+
+let otdel = ['MES',
+             'КСОДУ','PIMS']
+console.log(otdel.length)
 const Auth = () => {
     const location = useLocation()
     const isLogin = location.pathname === LOGIN_ROUTE
@@ -14,14 +18,39 @@ const Auth = () => {
             <Card  className="p-5">
                 <h2 className="m-auto">{isLogin ? 'Авторизация' :  'Регистрация'}</h2>
                 <Form className="d-flex flex-column">
+                    {isLogin ? 
+                    <div>
                     <Form.Control 
                         className="mt-3"
-                        placeholder="Введите ваш email..."
+                        placeholder="Введите ваш Логин или Email..."
                     />
                     <Form.Control 
                         className="mt-3"
                         placeholder="Введите ваш пароль..."
                     />
+                    </div>
+                    :
+                    <div>
+                    <Form.Control 
+                        className="mt-3"
+                        placeholder="Введите ваша ФИО... "
+                    />
+                    <Form.Select className="mt-3">
+                        otdel.forEach(element ={">"} {
+                            <option>element</option>
+                        });
+                        
+                    </Form.Select>
+                    <Form.Control 
+                        className="mt-3"
+                        placeholder="Введите ваш Логин или Email..."
+                    />
+                    <Form.Control 
+                        className="mt-3"
+                        placeholder="Введите ваш пароль..."
+                    />
+                    </div>
+                    }
 
               
                     <Row className="d-flex justify-content-between g-0 mt-3">
