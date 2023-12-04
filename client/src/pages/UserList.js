@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Card, Container, Form, Row } from "react-bootstrap";
-import { NavLink, useLocation } from "react-router-dom/cjs/react-router-dom";
+
 
 const UserList = () => {
     return (
@@ -14,27 +14,34 @@ const UserList = () => {
                <div>Отдел:</div> 
             </Card>
             
-            <Card  className="p-5"
-                style={{marginLeft: "50px"}}
-            >
-               <div>Список людей входящих в отдел:</div> 
-               <Form className="d-flex flex-column">
-                   <div className="flex-end">
-                    <Row className="mt-3">
-                        ФИО 1
-                    </Row>
-                    <Row className="mt-3">
-                        ФИО 2
-                    </Row>
-                    <Row className="mt-3">
-                        ФИО 3
-                    </Row>
-                    <Row className="mt-3">
-                        ФИО 4
-                    </Row>
+            {/*Тут начинается второй Блок */}
+            <div className="d-flex flex-column">
+                <Card  className="p-5"
+                    style={{marginLeft: "50px"}}
+                >
+                <div>Список людей входящих в отдел:</div> 
+                <Form className="d-flex justify-content-center">
+                    <div className="g-0">
+                            <Row className="mt-3">
+                                Джаримок Ислам Юрьевич
+                            </Row>
+                            <Row className="mt-3">
+                                Иванов Иван Иванович
+                            </Row>
+                            <Row className="mt-3">
+                                Петров Петр Петрович
+                            </Row>
+                        </div>
+                    </Form>
+                </Card>
+                <div>
+                    <Button className="align-items-baseline mt-2"
+                        style={{marginLeft: "50px"}}
+                        variant="outline-success">
+                        Что то сделать
+                    </Button>
                 </div>
-                </Form>
-            </Card>
+            </div>
         </Container>
 
     )

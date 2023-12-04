@@ -5,7 +5,7 @@ import { LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/consts";
 
 let otdel = ['MES',
              'КСОДУ','PIMS']
-console.log(otdel.length)
+console.log("Сколько элементов в массиве:",otdel.length)
 const Auth = () => {
     const location = useLocation()
     const isLogin = location.pathname === LOGIN_ROUTE
@@ -36,10 +36,7 @@ const Auth = () => {
                         placeholder="Введите ваша ФИО... "
                     />
                     <Form.Select className="mt-3">
-                        otdel.forEach(element ={">"} {
-                            <option>element</option>
-                        });
-                        
+                            <option>Должность</option>
                     </Form.Select>
                     <Form.Control 
                         className="mt-3"
