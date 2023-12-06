@@ -9,7 +9,7 @@ import OtdelStore from './store/OtdelStore.js';
 
 export const Context = createContext(null)
 //import reportWebVitals from './reportWebVitals';
-console.log("Какая то ссылка", process.env.REACT_APP)
+console.log("Какая то ссылка", process.env.REACT_APP_API_URL)
 /*
 ReactDOM.render(
   <App />,
