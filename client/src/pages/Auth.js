@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Card, Container, Form, Row } from "react-bootstrap";
 import { NavLink, useLocation } from "react-router-dom/cjs/react-router-dom";
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/consts";
+import { login, registration } from "../http/userAPI";
 
 let otdel = ['MES',
              'КСОДУ','PIMS']
@@ -9,7 +10,24 @@ console.log("Сколько элементов в массиве:",otdel.length)
 const Auth = () => {
     const location = useLocation()
     const isLogin = location.pathname === LOGIN_ROUTE
-    console.log(location)
+    
+    const [Name, setName] = useState('')
+    const [Login, setLogin] = useState('')
+    const [Password, setPassword] = useState('')
+    
+
+const click = async () => {
+    if (isLogin) {
+        const response = await login()
+        console.log(response)
+    } else {
+        const response = await registration(Name,Login,Password)
+        console.log(response)
+    }
+    
+}
+
+    //console.log(location)
     return (
         <Container
             className="d-flex justify-content-center align-items-center"
@@ -23,10 +41,14 @@ const Auth = () => {
                     <Form.Control 
                         className="mt-3"
                         placeholder="Введите ваш Логин или Email..."
+                        value={Login}
+                        onChange={e => setLogin(e.target.value)}
                     />
                     <Form.Control 
                         className="mt-3"
                         placeholder="Введите ваш пароль..."
+                        value={Password}
+                        onChange={e => setPassword(e.target.value)}
                     />
                     </div>
                     :
@@ -34,6 +56,8 @@ const Auth = () => {
                     <Form.Control 
                         className="mt-3"
                         placeholder="Введите ваша ФИО... "
+                        value={Name}
+                        onChange={e => setName(e.target.value)}
                     />
                     <Form.Select className="mt-3">
                             <option>Должность</option>
@@ -41,10 +65,14 @@ const Auth = () => {
                     <Form.Control 
                         className="mt-3"
                         placeholder="Введите ваш Логин или Email..."
+                        value={Login}
+                        onChange={e => setLogin(e.target.value)}
                     />
                     <Form.Control 
                         className="mt-3"
                         placeholder="Введите ваш пароль..."
+                        value={Password}
+                        onChange={e => setPassword(e.target.value)}
                     />
                     </div>
                     }
@@ -63,13 +91,17 @@ const Auth = () => {
                         {isLogin ?         
                             <Button 
                                 style={{width:100}}
-                                variant="outline-success">
+                                variant="outline-success"
+                                onClick={click}
+                                >
                                 Войти
                             </Button>
                             :
                             <Button 
                                 style={{width:160}}
-                                variant="outline-success">
+                                variant="outline-success"
+                                onClick={click}
+                                >
                                Регистрация
                             </Button>
                         }
