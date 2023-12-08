@@ -1,7 +1,7 @@
 const ApiError = require('../error/ApiError')
 const bcrypt = require ('bcrypt')
 const jwt = require('jsonwebtoken')
-const {User} = require("../modeles/models")
+const {User, Otdel} = require("../modeles/models")
 
 const generateJwt = (id,  Name, Login) => {
     return jwt.sign(
@@ -25,7 +25,7 @@ class UserController {
             return next(ApiError.badRequest('Пользователь с таким login уже существует'))
         }
         //Проверка на существует указаный ID отдела --------------
-       const otdelCheck = await User.findOne({where:{Otdel_id}})
+       const otdelCheck = await Otdel.findOne({where:{id: Otdel_id}})
         if (!otdelCheck) {
             return next(ApiError.badRequest('Отдела с таким ID не существует'))
         }
@@ -33,7 +33,7 @@ class UserController {
         const hashPassword = await bcrypt.hash(Password, 5)
         const user = await User.create({Name,Login, Password: hashPassword, PostId, Otdel_id})
         const token = generateJwt(user.id, user.Name, user.Login)
-        return res.json(token)
+        return res.json({token})
         
         } catch (e) {
             console.log(e)
@@ -56,7 +56,7 @@ class UserController {
         return res.json({token})
     }
 
-    async check(req, res, next) {
+    async check(req, res) {
         const token = generateJwt(req.user.id, req.user.Name, req.user.Login)
         return res.json({token})
     }

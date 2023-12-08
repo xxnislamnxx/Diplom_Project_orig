@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Card, Container, Form, Row } from "react-bootstrap";
 import { NavLink, useLocation } from "react-router-dom/cjs/react-router-dom";
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/consts";
 import { login, registration } from "../http/userAPI";
+import {observer} from 'mobx-react-lite'
+import { Context } from '../index.js'
 
 let otdel = ['MES',
              'КСОДУ','PIMS']
 console.log("Сколько элементов в массиве:",otdel.length)
-const Auth = () => {
+
+const Auth = observer(() => {
+    const {user} = useContext(Context)
     const location = useLocation()
     const isLogin = location.pathname === LOGIN_ROUTE
     
@@ -16,16 +20,16 @@ const Auth = () => {
     const [Password, setPassword] = useState('')
     
 
-const click = async () => {
-    if (isLogin) {
-        const response = await login()
-        console.log(response)
-    } else {
-        const response = await registration(Name,Login,Password)
-        console.log(response)
+    const click = async () => {
+        let data;
+        if (isLogin) {
+            data = await login(Login,Password)
+        } else {
+            data = await registration(Name,Login,Password)
+        }
+        user.setUser(user)
+        user.setIsAuth(true)
     }
-    
-}
 
     //console.log(location)
     return (
@@ -112,7 +116,7 @@ const click = async () => {
 
     )
 
-}
+})
 export default Auth;
 
 /*
