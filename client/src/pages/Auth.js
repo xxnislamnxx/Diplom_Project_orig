@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Button, Card, Container, Form, Row } from "react-bootstrap";
-import { NavLink, useLocation } from "react-router-dom/cjs/react-router-dom";
-import { LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/consts";
+import { NavLink, useHistory, useLocation } from "react-router-dom/cjs/react-router-dom";
+import { LOGIN_ROUTE, REGISTRATION_ROUTE, USERLIST_ROUTE } from "../utils/consts";
 import { login, registration } from "../http/userAPI";
 import {observer} from 'mobx-react-lite'
 import { Context } from '../index.js'
@@ -13,6 +13,7 @@ console.log("Сколько элементов в массиве:",otdel.length)
 const Auth = observer(() => {
     const {user} = useContext(Context)
     const location = useLocation()
+    const history = useHistory()
     const isLogin = location.pathname === LOGIN_ROUTE
     
     const [Name, setName] = useState('')
@@ -21,6 +22,7 @@ const Auth = observer(() => {
     
 
     const click = async () => {
+       try {
         let data;
         if (isLogin) {
             data = await login(Login,Password)
@@ -29,6 +31,10 @@ const Auth = observer(() => {
         }
         user.setUser(user)
         user.setIsAuth(true)
+        history.push(USERLIST_ROUTE)
+       } catch (e) {
+        alert(e.response.data.message)
+       }
     }
 
     //console.log(location)

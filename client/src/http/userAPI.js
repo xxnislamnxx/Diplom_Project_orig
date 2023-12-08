@@ -5,6 +5,7 @@ import {jwtDecode} from "jwt-decode";
 
 export const registration = async (Name, Login, Password) => {
     const {data} = await $host.post('api/user/registration', {Name, Login, Password, PostId: 2, Otdel_id: 2 })
+    localStorage.setItem('token', data.token)
     return jwtDecode(data.token)
 }
 /*
@@ -13,6 +14,7 @@ export const registration = async (Name, Login, Password) => {
 */
 export const login = async (Login, Password) => {
     const {data} = await $host.post('api/user/login', {Login, Password})
+    localStorage.setItem('token', data.token)
     return jwtDecode(data.token)
 }
 /*
@@ -23,6 +25,7 @@ useEffect(async () => {
 
 
 export const check = async () => {
-    const response = await $host.post('api/user/registration', )
-    return response
+    const {data} = await $authHost.get('api/user/auth', )
+    localStorage.setItem('token', data.token)
+    return jwtDecode(data.token)
 }
