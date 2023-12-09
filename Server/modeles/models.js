@@ -8,6 +8,7 @@ const User = sequelize.define('User',
     Name:{type: DataTypes.STRING(100), unique: false},
     Login:{type: DataTypes.STRING(100), unique: true},
     Password:{type: DataTypes.STRING(100), unique: false},
+    Role:{type: DataTypes.STRING(10), unique: false},
     PostId:{type: DataTypes.INTEGER},
     DateTimeChange:{type: DataTypes.DATE, defaultValue: DataTypes.NOW},
     

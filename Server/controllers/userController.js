@@ -14,7 +14,7 @@ class UserController {
     async registration(req,res,next) {
         
         try {
-            const{Name,Login, Password, PostId, Otdel_id} = req.body
+            const{Name,Login, Password, Role, PostId, Otdel_id} = req.body
         //Проверка на введеный логин или пароль --------------
         if (!Login || !Password) {
             return next(ApiError.badRequest('Неккоректный login или пароль'))
@@ -31,7 +31,7 @@ class UserController {
         }
         /*-------*/ 
         const hashPassword = await bcrypt.hash(Password, 5)
-        const user = await User.create({Name,Login, Password: hashPassword, PostId, Otdel_id})
+        const user = await User.create({Name,Login, Password: hashPassword, Role, PostId, Otdel_id})
         const token = generateJwt(user.id, user.Name, user.Login)
         return res.json({token})
         
@@ -64,7 +64,22 @@ class UserController {
     async getAll (req,res,next){
 
         try {
-            const users = await User.findAll({attributes: ['id','Name','Login']})
+            const users = await User.findAll(
+                {attributes: ['id','Name','Login','Role','Otdel_id','PostId']})
+            return res.json(users)
+        } catch (e) {
+            return next(ApiError.badRequest('Возникла непредвиденная ошибка'))
+        }
+    }
+    
+    async getUsers (req,res,next){
+        try {
+            const{Otdel_id} = req.body
+            const users = await User.findAll(
+                {
+                    attributes: ['id','Name','Login'],
+                    where: {Otdel_id}                
+                })
             return res.json(users)
         } catch (e) {
             return next(ApiError.badRequest('Возникла непредвиденная ошибка'))
