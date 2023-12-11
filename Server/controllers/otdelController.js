@@ -12,11 +12,13 @@ class OtdelController {
     async getAll(req,res,next) {
         try {
             let {limit, page} = req.query
-            page = page || 1
+            /*page = page || 1
             limit = limit || 3
-            let offset = page * limit - limit
+            let offset = page * limit - limit*/
             let otdels;
-            otdels = await Otdel.findAndCountAll({limit: parseInt(limit), offset: parseInt(offset)})
+            //otdels = await Otdel.findAndCountAll()
+            otdels = await Otdel.findAll()
+
             return res.json(otdels)
         } catch (e) {
             return next(ApiError.badRequest('Возникла непредвиденная ошибка'))            

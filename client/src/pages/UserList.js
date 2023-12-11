@@ -1,20 +1,51 @@
-import React from "react";
-import { Button, Card, Container, Form, Row } from "react-bootstrap";
+import React, { useContext, useEffect } from "react";
+import {Card, Container } from "react-bootstrap";
+import OtdelBar from "../components/OtdelBar";
+import UsersBar from "../components/UsersBar";
+import { observer } from "mobx-react-lite";
+import { Context } from "../index";
+import { getOtdel } from "../http/otdelAPI";
 
 
-const UserList = () => {
+
+const UserList = observer(() => {
+    const {otdel} =useContext(Context)
+
+    useEffect(() => {
+        getOtdel().then(data => otdel.setOtdel(data))
+    }, [])
     return (
         <Container
             className="d-flex justify-content-center align-items-center"
             style={{height: window.innerHeight - 54}}
         >
-            <Card  className="p-5"
+            <Card  className="p-3"
                 style={{marginRight: "50px"}}
             >
-               <div>Отдел:</div> 
+            <div>    
+                <OtdelBar/>
+            </div> 
             </Card>
-            
+
             {/*Тут начинается второй Блок */}
+
+            <Card className="p-3"
+                style={{marginRight: "50px"}}
+            >
+            <div>    
+                <UsersBar/>
+            </div> 
+            </Card>
+
+
+            </Container>
+    )
+
+})
+export default UserList;
+            
+            {/*
+            {/*Тут начинается второй Блок 
             <div className="d-flex flex-column">
                 <Card  className="p-5"
                     style={{marginLeft: "50px"}}
@@ -48,3 +79,5 @@ const UserList = () => {
 
 }
 export default UserList;
+
+*/}

@@ -1,19 +1,46 @@
 import {makeAutoObservable} from "mobx"
 export default class OtdelStore {
     constructor() {
-        this._otdel = [
+        this._otdel = []
+        /*
             {id: 1, Name: 'MES', Director_Id: 1},
             {id: 2, Name: 'КСОДУ', Director_Id: 1},
-            {id: 3, Name: 'PIMS', Director_Id: 1}
+            {id: 3, Name: 'PIMS', Director_Id: 1},
+            {id: 4, Name: 'СМЗиС', Director_Id: 1},
+            {id: 5, Name: 'АСКУЭ', Director_Id: 1},
         ]
+        */
+        this._users = [
+            {id: 1, Name: 'Ислам', Otdel_id: 1},
+            {id: 2, Name: 'Леша', Otdel_id: 2},
+            {id: 3, Name: 'Никита', Otdel_id: 2},
+            {id: 4, Name: 'Павел', Otdel_id: 4},
+            {id: 5, Name: 'Юра', Otdel_id: 4},
+        ]
+        
+        this._selectedOtdel = {}
         makeAutoObservable(this)
     }
 
     setOtdel(otdel) {
         this._otdel = otdel}
+    
+    setSelectedOtdel(otdel) {
+        this._selectedOtdel = otdel}
+    
+    setUsers(users) {
+        this._users = users}
 
-    get otdel() {
+
+
+    get otdels() {
        return this._otdel}
+    
+    get users() {
+    return this._users}
+    
+    get selectedOtdel() {
+    return this._selectedOtdel}
 
         
 

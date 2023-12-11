@@ -1,5 +1,4 @@
 import { $authHost, $host } from "./index";
-import {jwtDecode} from "jwt-decode";
 
 
 export const createOtdel = async (Name, Director_Id) => {
