@@ -5,6 +5,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 const UsersBar = observer(  () => {
     const {user} = useContext(Context)
+    const text = "В этом отделе нет сотрудников"
     return (
         <div>
             <div>

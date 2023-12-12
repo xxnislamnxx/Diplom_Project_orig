@@ -75,12 +75,17 @@ class UserController {
     async getUsers (req,res,next){
         try {
             const{Otdel_id} = req.body
+            const text = [{Name:'В отделе нет сотрудников'}]
             const users = await User.findAll(
                 {
                     attributes: ['id','Name','Login'],
                     where: {Otdel_id: Otdel_id}                
                 })
-            return res.json(users)
+            if (users.length === 0) {
+                return res.json(text)          
+            }else{
+                
+            return res.json(users)}
         } catch (e) {
             return next(ApiError.badRequest(e))
         }

@@ -19,9 +19,8 @@ const UserList = observer(() => {
     
     if (otdel.selectedOtdel.id) {
         getUsers(otdel.selectedOtdel.id).then(data => user.setUsers(data))
-
+        
     }
-
     
 {/*    useEffect(() => {
         getUsers().then(data => user.setUsers(data))
