@@ -10,13 +10,7 @@ export default class OtdelStore {
             {id: 5, Name: 'АСКУЭ', Director_Id: 1},
         ]
         */
-        this._users = [
-            {id: 1, Name: 'Ислам', Otdel_id: 1},
-            {id: 2, Name: 'Леша', Otdel_id: 2},
-            {id: 3, Name: 'Никита', Otdel_id: 2},
-            {id: 4, Name: 'Павел', Otdel_id: 4},
-            {id: 5, Name: 'Юра', Otdel_id: 4},
-        ]
+        
         
         this._selectedOtdel = {}
         makeAutoObservable(this)

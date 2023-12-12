@@ -78,11 +78,11 @@ class UserController {
             const users = await User.findAll(
                 {
                     attributes: ['id','Name','Login'],
-                    where: {Otdel_id}                
+                    where: {Otdel_id: Otdel_id}                
                 })
             return res.json(users)
         } catch (e) {
-            return next(ApiError.badRequest('Возникла непредвиденная ошибка'))
+            return next(ApiError.badRequest(e))
         }
     }
 

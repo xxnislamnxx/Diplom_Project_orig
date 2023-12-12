@@ -15,7 +15,8 @@ const OtdelBar = observer(  () => {
                     <ListGroup.Item 
                         style={{cursor: 'pointer'}}
                         active={otdell.id === otdel.selectedOtdel.id}
-                        onClick={() => otdel.setSelectedOtdel(otdell)}
+                        onClick={() => otdel.setSelectedOtdel(otdell)
+                        }
                         key={otdell.id}
                     >
                         {otdell.Name}

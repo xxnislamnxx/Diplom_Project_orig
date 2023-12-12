@@ -5,15 +5,33 @@ import UsersBar from "../components/UsersBar";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
 import { getOtdel } from "../http/otdelAPI";
+import { getUsers } from "../http/userAPI";
 
 
 
 const UserList = observer(() => {
-    const {otdel} =useContext(Context)
+    const {otdel} = useContext(Context)
+    const {user} = useContext(Context)
 
     useEffect(() => {
         getOtdel().then(data => otdel.setOtdel(data))
+        
+        
     }, [])
+    
+    if (otdel.selectedOtdel.id) {
+        getUsers(otdel.selectedOtdel.id).then(data => user.setUsers(data))
+    }
+
+    
+{/*    useEffect(() => {
+        getUsers().then(data => user.setUsers(data))
+    }, [])*/}
+    
+
+    
+
+
     return (
         <Container
             className="d-flex justify-content-center align-items-center"
