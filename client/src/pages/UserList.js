@@ -15,12 +15,11 @@ const UserList = observer(() => {
 
     useEffect(() => {
         getOtdel().then(data => otdel.setOtdel(data))
-        
-        
     }, [])
     
     if (otdel.selectedOtdel.id) {
         getUsers(otdel.selectedOtdel.id).then(data => user.setUsers(data))
+
     }
 
     

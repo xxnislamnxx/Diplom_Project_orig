@@ -1,17 +1,16 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect  } from "react";
 import { Button, Card, Container, Form, Row } from "react-bootstrap";
 import { NavLink, useHistory, useLocation } from "react-router-dom/cjs/react-router-dom";
 import { LOGIN_ROUTE, REGISTRATION_ROUTE, USERLIST_ROUTE } from "../utils/consts";
 import { login, registration } from "../http/userAPI";
 import {observer} from 'mobx-react-lite'
 import { Context } from '../index.js'
+import { getOtdel } from "../http/otdelAPI";
 
-let otdel = ['MES',
-             'КСОДУ','PIMS']
-console.log("Сколько элементов в массиве:",otdel.length)
 
 const Auth = observer(() => {
     const {user} = useContext(Context)
+    const {otdel} = useContext(Context)
     const location = useLocation()
     const history = useHistory()
     const isLogin = location.pathname === LOGIN_ROUTE
@@ -19,6 +18,7 @@ const Auth = observer(() => {
     const [Name, setName] = useState('')
     const [Login, setLogin] = useState('')
     const [Password, setPassword] = useState('')
+    const [Otdel_id, setOtdel_id] = useState('')
     
 
     const click = async () => {
@@ -27,7 +27,7 @@ const Auth = observer(() => {
         if (isLogin) {
             data = await login(Login,Password)
         } else {
-            data = await registration(Name,Login,Password)
+            data = await registration(Name,Login,Password,Otdel_id)
         }
         user.setUser(user)
         user.setIsAuth(true)
@@ -36,6 +36,10 @@ const Auth = observer(() => {
         alert(e.response.data.message)
        }
     }
+
+    useEffect(() => {
+        getOtdel().then(data => otdel.setOtdel(data))
+    }, [])
 
     //console.log(location)
     return (
@@ -69,8 +73,16 @@ const Auth = observer(() => {
                         value={Name}
                         onChange={e => setName(e.target.value)}
                     />
-                    <Form.Select className="mt-3">
-                            <option>Должность</option>
+                    <Form.Select className="mt-3"
+                        onChange={e => setOtdel_id(e.target.options.selectedIndex)}
+                    >
+                        <option>Укажите отдел</option>
+                        {otdel.otdels.map(otdell => 
+                            <option 
+                                key={otdell.id}
+                            >
+                                {otdell.Name}
+                            </option>)}
                     </Form.Select>
                     <Form.Control 
                         className="mt-3"

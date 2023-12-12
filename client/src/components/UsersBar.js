@@ -14,7 +14,8 @@ const UsersBar = observer(  () => {
                 {user.users.map(userss => 
                     <ListGroup.Item 
                         style={{cursor: 'pointer'}}
-                        key={userss.id}>
+                        key={userss.id}
+                        >
                         {userss.Name}
                     </ListGroup.Item>
                 )}
