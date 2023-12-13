@@ -34,6 +34,11 @@ import {useHistory} from "react-router-dom/cjs/react-router-dom";
               <Button 
                 variant={"outline-light"} 
                 style={{marginLeft: "20px"}}
+                onClick={() => logOut()}>Проекты</Button>
+
+              <Button 
+                variant={"outline-light"} 
+                style={{marginLeft: "20px"}}
                 onClick={() => logOut()}>Выйти</Button>
             </Nav>
             :

@@ -3,11 +3,10 @@ import React, { useContext } from "react";
 import { Context } from "../index";
 import ListGroup from 'react-bootstrap/ListGroup';
 
-const UsersBar = observer(  () => {
+const UsersBar = observer(  ({onHidden}) => {
     const {user} = useContext(Context)
-    const text = "В этом отделе нет сотрудников"
     return (
-        <div>
+        <div hidden={onHidden}>
             <div>
                 Список сотрудников в отделе:
             </div>

@@ -65,7 +65,10 @@ class UserController {
 
         try {
             const users = await User.findAll(
-                {attributes: ['id','Name','Login','Role','Otdel_id','PostId']})
+                {   
+                    
+                    attributes: ['id','Name','Login','Role','Otdel_id','PostId']
+                })
             return res.json(users)
         } catch (e) {
             return next(ApiError.badRequest('Возникла непредвиденная ошибка'))
@@ -75,9 +78,10 @@ class UserController {
     async getUsers (req,res,next){
         try {
             const{Otdel_id} = req.body
-            const text = [{Name:'В отделе нет сотрудников'}]
+            const text = [{id:1 ,Name:'В отделе нет сотрудников'}]
             const users = await User.findAll(
                 {
+                    order: [['Postid', 'asc']],
                     attributes: ['id','Name','Login'],
                     where: {Otdel_id: Otdel_id}                
                 })

@@ -8,7 +8,7 @@ import { Context } from './index.js';
 import { check } from './http/userAPI.js';
 import { Spinner } from 'react-bootstrap';
 import { set } from 'mobx';
-//import Statistics from './components/Statistics.js';
+
 const App = observer( () => {
   const {user} = useContext(Context)
   const [loading, setLoading] = useState(true)
@@ -29,6 +29,7 @@ const App = observer( () => {
       <BrowserRouter>
         <NavBar />
         <AppRouter />
+        
       </BrowserRouter>
       
 
