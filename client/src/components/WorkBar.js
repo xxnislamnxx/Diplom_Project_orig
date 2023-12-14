@@ -9,7 +9,7 @@ const WorkBar = observer(() => {
     return (
         <div>
             <div>
-                Кол-во задач:
+                Кол-во проектов:
             </div>
             <ListGroup className="mt-3">
                 {work.works.map(workss => 

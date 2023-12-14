@@ -3,9 +3,9 @@ const bcrypt = require ('bcrypt')
 const jwt = require('jsonwebtoken')
 const {User, Otdel} = require("../modeles/models")
 
-const generateJwt = (id,  Name, Login) => {
+const generateJwt = (id, Name, Login, Role, PostId, Otdel_id) => {
     return jwt.sign(
-        {id, Name, Login},
+        {id, Name, Login, Role, PostId, Otdel_id},
         process.env.SECRET_KEY,
         {expiresIn: '24h'})
 }
@@ -32,7 +32,7 @@ class UserController {
         /*-------*/ 
         const hashPassword = await bcrypt.hash(Password, 5)
         const user = await User.create({Name,Login, Password: hashPassword, Role, PostId, Otdel_id})
-        const token = generateJwt(user.id, user.Name, user.Login)
+        const token = generateJwt(user.id, user.Name, user.Login, user.Role, user.PostId, user.Otdel_id)
         return res.json({token})
         
         } catch (e) {
@@ -52,12 +52,12 @@ class UserController {
         if (!comparePassword) {
             return next(ApiError.internal('Указан неверный пароль'))
         }
-        const token = generateJwt(user.id, user.Name, user.Login)
+        const token = generateJwt(user.id, user.Name, user.Login, user.Role, user.PostId, user.Otdel_id)
         return res.json({token})
     }
 
     async check(req, res) {
-        const token = generateJwt(req.user.id, req.user.Name, req.user.Login)
+        const token = generateJwt(req.user.id, req.user.Name, req.user.Login,req.user.Role, req.user.PostId, req.user.Otdel_id)
         return res.json({token})
     }
 

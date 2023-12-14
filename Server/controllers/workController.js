@@ -1,5 +1,5 @@
 //логика 
-const {WorkList} = require('../modeles/models')
+const {WorkList,TaskList} = require('../modeles/models')
 const ApiError = require('../error/ApiError')
 
 class workController {
@@ -12,10 +12,15 @@ class workController {
     async getWork(req,res,next) {
         try {
             const {Otdel_id} = req.body
+            const text = [{id:1 ,Text:'В отделе нет проектов, для создания проекат обратитесь к руководителю'}]
             const work = await WorkList.findAll({where:{Otdel_id}})
-            return res.json(work)
+            if (WorkList.length === 0) {
+                return res.json(text)          
+            }else{
+                
+            return res.json(work)}
         } catch (e) {
-            return next(ApiError.badRequest(e +'Возникла непредвиденная ошибка'))
+            return next(ApiError.badRequest(e))
         }
 
     }
