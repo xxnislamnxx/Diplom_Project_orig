@@ -37,7 +37,7 @@ const UserList = observer(() => {
     }
     return (
         <Container>
-            <Row className="justify-content-md-center mt-2">
+            <Row className="justify-content-md-center mt-4">
                 <Col md={2}>
                     <div>    
                         <OtdelBar/>

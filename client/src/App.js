@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 import { Context } from './index.js';
 import { check } from './http/userAPI.js';
 import { Spinner } from 'react-bootstrap';
-import { set } from 'mobx';
+import Project from './pages/Project.js';
 
 const App = observer( () => {
   const {user} = useContext(Context)

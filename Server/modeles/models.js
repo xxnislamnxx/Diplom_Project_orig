@@ -21,9 +21,29 @@ const Otdel = sequelize.define('Otdel',
     DateTimeChange:{type: DataTypes.DATE, defaultValue: DataTypes.NOW},
 },{timestamps: false})
 
+const WorkList = sequelize.define('WorkList', 
+{
+    id:{type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    Otdel_id:{type: DataTypes.INTEGER },
+    Text:{type: DataTypes.STRING(100) },
+    Completed:{type: DataTypes.BOOLEAN, defaultValue: false},
+},{timestamps: false})
+
+
+const TaskList = sequelize.define('TaskList', 
+{
+    id:{type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    Work_id:{type: DataTypes.INTEGER },
+    User_id:{type: DataTypes.INTEGER },
+    Text:{type: DataTypes.STRING(100)},
+    Completed:{type: DataTypes.BOOLEAN, defaultValue: false},
+},{timestamps: false})
+
+
 // 1 ко многим
 Otdel.hasMany(User, {sourceKey: 'id',foreignKey: 'Otdel_id'})
+WorkList.hasMany(TaskList, {sourceKey: 'id',foreignKey: 'Work_id'})
 
 
 
-module.exports = {User,Otdel}
+module.exports = {User,Otdel,WorkList,TaskList}

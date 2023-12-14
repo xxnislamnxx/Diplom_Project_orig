@@ -26,6 +26,7 @@ const Auth = observer(() => {
         let data;
         if (isLogin) {
             data = await login(Login,Password)
+            console.log(data)
         } else {
             data = await registration(Name,Login,Password,Otdel_id)
         }
@@ -95,6 +96,7 @@ const Auth = observer(() => {
                         className="mt-3"
                         placeholder="Введите ваш пароль..."
                         value={Password}
+                        type="password"
                         onChange={e => setPassword(e.target.value)}
                     />
                     </div>

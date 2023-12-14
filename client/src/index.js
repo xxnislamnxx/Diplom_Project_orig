@@ -4,6 +4,7 @@ import './index';
 import App from './App.js';
 import UserStore from './store/UserStore.js';
 import OtdelStore from './store/OtdelStore.js';
+import WorkStore from './store/WorkStore.js';
 
 
 
@@ -22,7 +23,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(  
   <Context.Provider value={{
       user: new UserStore(),
-      otdel : new OtdelStore()
+      otdel : new OtdelStore(),
+      work : new WorkStore()
   }}>
     <App />
   </Context.Provider>

@@ -3,26 +3,23 @@ import React, { useContext } from "react";
 import { Context } from "../index";
 import ListGroup from 'react-bootstrap/ListGroup';
 
-const WorkBar = observer(({onHidden}) => {
+const WorkBar = observer(() => {
     const {user} = useContext(Context)
-    const text = "В этом отделе нет сотрудников"
+    const {work} = useContext(Context)
     return (
-        <div hidden={onHidden}>
+        <div>
             <div>
-                Начальник отдела:
+                Кол-во задач:
             </div>
             <ListGroup className="mt-3">
-                
-                {
+                {work.works.map(workss => 
                     <ListGroup.Item 
-                    style={{cursor: 'pointer'}}
-                    key="0"
-                    
-                    >
-                    {user.users.length == 0? "": user.users.at(0).Name}
-                </ListGroup.Item>
-                }
-
+                        style={{cursor: 'pointer'}}
+                        key={workss.id}
+                        >
+                        {workss.Text}
+                    </ListGroup.Item>
+                )}
             </ListGroup>
         </div>
 
