@@ -9,6 +9,7 @@ import { getUsers } from "../http/userAPI";
 import CreateOtdel from "../components/modals/CreateOtdel";
 import DirectoBar from "../components/DirectorBar";
 import WorkBar from "../components/WorkBar";
+import TaskBar from "../components/TaskBar";
 
 
 
@@ -61,7 +62,7 @@ const UserList = observer(() => {
                 </Col>
                 <Col md="auto">
                     <div>    
-                        <WorkBar onHidden={onHidden}/>
+                        <TaskBar onHidden={onHidden}/>
                     </div> 
                 </Col>
             </Row>
