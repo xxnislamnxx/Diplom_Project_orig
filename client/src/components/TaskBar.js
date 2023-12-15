@@ -1,25 +1,28 @@
 import { observer } from "mobx-react-lite";
-import React, { useContext } from "react";
+import React, { useContext,useEffect} from "react";
 import { Context } from "../index";
 import ListGroup from 'react-bootstrap/ListGroup';
+import { getTask } from "../http/workApi";
 
-const TaskBar = observer(({onHidden}) => {
+const TaskBar = observer(({Work_id}) => {
     const {user} = useContext(Context)
     const {work} = useContext(Context)
+    
+
     return (
         <div>
-            <div hidden={onHidden}>
-                Кол-во задач:
+            <div >
+                Кол-во задач: {Work_id}
             </div>
-            <ListGroup className="mt-3">
-                {/*work.works.map(workss => 
+            <ListGroup className="mt-0">
+                {work.task.map(tasks => 
                     <ListGroup.Item 
                         style={{cursor: 'pointer'}}
-                        key={workss.id}
+                        key={tasks.id}
                         >
-                        {workss.Text}
+                        {tasks.Text}
                     </ListGroup.Item>
-                )*/}
+                )}
             </ListGroup>
         </div>
 

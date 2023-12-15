@@ -34,7 +34,7 @@ const UserList = observer(() => {
     
   const  click = async () => 
     {
-        await console.log("пока")
+        await console.log(user.users)
     }
     return (
         <Container>

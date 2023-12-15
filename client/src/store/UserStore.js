@@ -1,7 +1,7 @@
 import {makeAutoObservable} from "mobx"
 export default class UserStore {
     constructor() {
-        this._users = []
+        this._users = [] //Хранится список сотрудников в отделе
         this._isAuth = false
         this._user = {}
         makeAutoObservable(this)
