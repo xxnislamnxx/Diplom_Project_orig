@@ -3,7 +3,7 @@ import {Card, Container,Button, Row,Col } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
 import WorkBar from "../components/WorkBar";
-import { getTask, getWork } from "../http/workApi";
+import { getTask, getWork,setWork } from "../http/workApi";
 import {jwtDecode} from "jwt-decode";
 
 const Project = observer(() => {
@@ -16,6 +16,16 @@ const Project = observer(() => {
     }, [])
 
    
+
+    const  setWorks = async (Otdel_id,Text,Completed) => 
+    {
+        try {
+            await setWork(Otdel_id,Text,Completed) 
+        } catch (e) {
+            alert(e.response.data.message)
+        }
+    }
+
     return (
         <Container>
             <Row className="justify-content-md-center mt-4">
@@ -24,7 +34,9 @@ const Project = observer(() => {
                         {console.log(jwtDecode(localStorage.getItem('token')))}
                         <WorkBar/>
                         <Button className="align-items-baseline mt-2"
-                            variant="outline-success">
+                            variant="outline-success"
+                            onClick={()=>setWorks(token,"Новый проект",false)}
+                            >
                             Создать проект
                         </Button>
                     </div> 
