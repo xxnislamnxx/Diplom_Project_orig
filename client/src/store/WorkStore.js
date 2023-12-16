@@ -4,8 +4,10 @@ export default class WorkStore {
         this._works = []
         this._task = []
         this._idUser = []
+        this._selectedWork = {}
         makeAutoObservable(this)
     }
+    
     setidUser(idUser) {
         this._user = idUser}
 
@@ -15,6 +17,10 @@ export default class WorkStore {
     setTask(task) {
         this._task = task}
 
+        
+    setSelectedWork(work) {
+        this._selectedWork = work}
+
     get idUser() {
        return this._idUser}
 
@@ -23,6 +29,9 @@ export default class WorkStore {
     
     get task() {
         return this._task}
+        
+    get selectedWork() {
+        return this._selectedWork}
         
 
 }

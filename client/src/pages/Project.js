@@ -15,7 +15,7 @@ const Project = observer(() => {
         getWork(token).then(data => work.setWorks(data))
     }, [])
 
-
+   
     return (
         <Container>
             <Row className="justify-content-md-center mt-4">
@@ -25,7 +25,7 @@ const Project = observer(() => {
                         <WorkBar/>
                         <Button className="align-items-baseline mt-2"
                             variant="outline-success">
-                            Что то сделать
+                            Создать проект
                         </Button>
                     </div> 
                 </Col>

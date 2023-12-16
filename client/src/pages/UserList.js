@@ -36,6 +36,7 @@ const UserList = observer(() => {
     {
         await console.log(user.users)
     }
+
     return (
         <Container>
             <Row className="justify-content-md-center mt-4">
