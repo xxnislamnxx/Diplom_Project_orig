@@ -5,11 +5,16 @@ import { Context } from "../index";
 import WorkBar from "../components/WorkBar";
 import { getTask, getWork,setWork } from "../http/workApi";
 import {jwtDecode} from "jwt-decode";
+import {useHistory} from "react-router-dom/cjs/react-router-dom";
+import { LOGIN_ROUTE, PROJECT_ROUTE, USERLIST_ROUTE } from '../utils/consts.js'
+
 
 const Project = observer(() => {
     const {otdel} = useContext(Context)
     const {user} = useContext(Context)
     const {work} = useContext(Context)
+    const history = useHistory()
+
    const token = jwtDecode(localStorage.getItem('token')).Otdel_id
    useEffect(() => {
         getWork(token).then(data => work.setWorks(data))
@@ -20,7 +25,8 @@ const Project = observer(() => {
     const  setWorks = async (Otdel_id,Text,Completed) => 
     {
         try {
-            await setWork(Otdel_id,Text,Completed) 
+            await setWork(Otdel_id,Text,Completed)
+            history.push(PROJECT_ROUTE)
         } catch (e) {
             alert(e.response.data.message)
         }
