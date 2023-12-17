@@ -43,7 +43,7 @@ const UserList = observer(() => {
                 <Col md={2}>
                     <div>    
                         <OtdelBar/>
-                        <Button className="align-items-baseline mt-2"
+                        <Button className="align-items-baseline mt-3"
                             variant="outline-success"
                             onClick={click}
                             >

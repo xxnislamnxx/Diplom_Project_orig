@@ -10,6 +10,7 @@ import { LOGIN_ROUTE, PROJECT_ROUTE, USERLIST_ROUTE } from '../utils/consts.js'
 import CreateOtdel from "../components/modals/CreateOtdel.js";
 import CreateWork from "../components/modals/CreateWork.js";
 import CreateTask from "../components/modals/CreateTask.js";
+import { getUsers } from "../http/userAPI.js";
 
 
 const Project = observer(() => {
@@ -24,6 +25,7 @@ const Project = observer(() => {
    const token = jwtDecode(localStorage.getItem('token')).Otdel_id
    useEffect(() => {
         getWork(token).then(data => work.setWorks(data))
+        getUsers(token).then(data => user.setUsers(data))
     }, [])
 
    

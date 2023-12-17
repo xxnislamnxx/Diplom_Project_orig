@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import {Button, Form, Modal} from 'react-bootstrap'
-import { setTask, setWork } from "../../http/workApi";
+import { getTask, setTask, setWork } from "../../http/workApi";
 import {jwtDecode} from "jwt-decode";
 import { Context } from "../../index";
 
@@ -13,6 +13,7 @@ const CreateTask = ({show,onHide}) => {
     {
         try {
             await setTask(work.selectedWork.id,token.id,value,false)
+            getTask(work.selectedWork.id).then(data => work.setTask(data))
         } catch (e) {
             alert(e.response.data.message)
         }
@@ -40,7 +41,7 @@ const CreateTask = ({show,onHide}) => {
         </Modal.Body>
         <Modal.Footer>
             <Button variant="outline-success" onClick={addTask}>Добавить</Button>
-            <Button onClick={onHide}>Закрыть</Button>
+            <Button variant="outline-danger" onClick={onHide}>Закрыть</Button>
         </Modal.Footer>
       </Modal>
 
