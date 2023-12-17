@@ -10,5 +10,7 @@ router.post('/updWork', workController.updWork)
 router.post('/updTask', workController.updTask)
 router.post('/WorkList', workController.getWork)
 router.post('/TaskList', workController.getTask)
+router.put('/delWork', workController.delWork)
+router.post('/delTask', workController.delTask)
 
 module.exports = router

@@ -51,6 +51,30 @@ class workController {
             return next(ApiError.badRequest('Возникла непредвиденная ошибка'))
         }
     }
+
+    async delWork(req,res,next) {
+        try {
+        const {Work_id} = req.body
+        const work = await WorkList.destroy({where:{id:Work_id}})
+        const task = await TaskList.destroy({where:{Work_id}})
+        return next(ApiError.internal('Удаление прошло успешно'))
+        } catch (e) {
+            console.log(e)
+            return next(ApiError.badRequest('Возникла непредвиденная ошибка'))
+        }
+    }
+    
+    async delTask(req,res,next) {
+        try {
+        const {Otdel_id} = req.body
+        const task = await TaskList.destroy({where:{Work_id}})
+        return next(ApiError.internal('Удаление прошло успешно'))
+        } catch (e) {
+            console.log(e)
+            return next(ApiError.badRequest('Возникла непредвиденная ошибка'))
+        }
+    }
+
     async getWork(req,res,next) {
         try {
             const {Otdel_id} = req.body

@@ -11,6 +11,7 @@ import CreateOtdel from "../components/modals/CreateOtdel.js";
 import CreateWork from "../components/modals/CreateWork.js";
 import CreateTask from "../components/modals/CreateTask.js";
 import { getUsers } from "../http/userAPI.js";
+import DeleteWork from "../components/modals/DeleteWork.js";
 
 
 const Project = observer(() => {
@@ -19,7 +20,7 @@ const Project = observer(() => {
     const {work} = useContext(Context)
     const history = useHistory()
     const [WorkVisible,setWorkVisible] = useState(false)
-
+    const [DelWorkVisible,setDelWorkVisible] = useState(false)
 
 
    const token = jwtDecode(localStorage.getItem('token')).Otdel_id
@@ -34,7 +35,7 @@ const Project = observer(() => {
     return (
         <Container>
             <Row className="justify-content-md-center mt-4">
-                <Col md={6}>
+                <Col md={8}>
                     <div>    
                         
                         <WorkBar/>
@@ -45,13 +46,20 @@ const Project = observer(() => {
                             >
                             Создать проект
                         </Button>
+                        <Button className="align-items-baseline mt-2"
+                            variant="outline-danger"
+                            onClick={()=> setDelWorkVisible(true)}
+                            style={{marginLeft: "20px"}}
+                            >
+                            Удалить проект
+                        </Button>
                     </div> 
                 </Col>
                 
             </Row>
 
             <CreateWork show={WorkVisible} onHide={()=> setWorkVisible(false)} />
-            
+            <DeleteWork show={DelWorkVisible} onHide={()=> setDelWorkVisible(false)}/>
         </Container>
     )
 

@@ -21,6 +21,16 @@ export const updTask = async (id,Completed) => {
 }
 
 /*------------*/
+export const delWork = async (Otdel_id) => {
+    const {data} = await $host.post('api/work/delWork',{Otdel_id})
+    return data
+}
+export const delTask = async (Otdel_id) => {
+    const {data} = await $host.post('api/work/delWork',{Otdel_id})
+    return data
+}
+
+/*------------*/
 export const getWork = async (Otdel_id) => {
     const {data} = await $host.post('api/work/WorkList',{Otdel_id})
     return data

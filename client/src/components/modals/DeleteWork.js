@@ -1,20 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import {Button, Form, Modal} from 'react-bootstrap'
-import { getWork, setWork } from "../../http/workApi";
+import { setWork } from "../../http/workApi";
 import {jwtDecode} from "jwt-decode";
-import { Context } from "../..";
 
 
-const CreateWork = ({show,onHide}) => {
+const DeleteWork = ({show,onHide}) => {
     const token = jwtDecode(localStorage.getItem('token'))
     const [value,setValue] = useState('')
-    const {work} = useContext(Context)
-    const  addWork = async () => 
+    
+    const  delWork = async () => 
     {
         try {
             await setWork(token.Otdel_id,value,0)
-            getWork(token.Otdel_id).then(data => work.setWorks(data))
-
+            
         } catch (e) {
             alert(e.response.data.message)
         }
@@ -29,7 +27,7 @@ const CreateWork = ({show,onHide}) => {
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-modal-sizes-title-sm">
-            Добавить проект
+            Удалить проект
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -37,11 +35,11 @@ const CreateWork = ({show,onHide}) => {
                 <Form.Control 
                 value={value}
                 onChange={e=> setValue(e.target.value)}
-                    placeholder="Введите название проекта"/>
+                    placeholder="Подтвердите удаления проекта"/>
             </Form>
         </Modal.Body>
         <Modal.Footer>
-            <Button variant="outline-success" onClick={addWork}>Добавить</Button>
+            <Button variant="outline-success" onClick={delWork}>Удалить</Button>
             <Button variant="outline-danger" onClick={onHide}>Закрыть</Button>
         </Modal.Footer>
       </Modal>
@@ -49,4 +47,4 @@ const CreateWork = ({show,onHide}) => {
     )
 
 }
-export default CreateWork;
+export default DeleteWork;
