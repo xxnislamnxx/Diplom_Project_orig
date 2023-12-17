@@ -11,10 +11,12 @@ export default class OtdelStore {
         ]
         */
         
-        
+        this._OneOtdel = []
         this._selectedOtdel = {}
         makeAutoObservable(this)
     }
+    setOneOtdel(otdel) {
+        this._OneOtdel = otdel}
 
     setOtdel(otdel) {
         this._otdel = otdel}
@@ -36,6 +38,7 @@ export default class OtdelStore {
     get selectedOtdel() {
     return this._selectedOtdel}
 
-        
-
+    get OneOtdel() {
+        return this._OneOtdel}
+    
 }

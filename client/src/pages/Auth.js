@@ -5,8 +5,8 @@ import { LOGIN_ROUTE, REGISTRATION_ROUTE, USERLIST_ROUTE } from "../utils/consts
 import { login, registration } from "../http/userAPI";
 import {observer} from 'mobx-react-lite'
 import { Context } from '../index.js'
-import { getOtdel } from "../http/otdelAPI";
-
+import { getOneOtdel, getOtdel } from "../http/otdelAPI";
+import {jwtDecode} from "jwt-decode";
 
 const Auth = observer(() => {
     const {user} = useContext(Context)
@@ -24,11 +24,16 @@ const Auth = observer(() => {
     const click = async () => {
        try {
         let data;
+
         if (isLogin) {
             data = await login(Login,Password)
+            const token = jwtDecode(localStorage.getItem('token'))
+            getOneOtdel(token.Otdel_id).then(data => otdel.setOneOtdel(data))
             console.log(data)
         } else {
             data = await registration(Name,Login,Password,Otdel_id)
+            const token = jwtDecode(localStorage.getItem('token'))
+            getOneOtdel(token.Otdel_id).then(data => otdel.setOneOtdel(data))
         }
         user.setUser(user)
         user.setIsAuth(true)
@@ -38,6 +43,8 @@ const Auth = observer(() => {
        }
     }
 
+
+    
     useEffect(() => {
         getOtdel().then(data => otdel.setOtdel(data))
     }, [])

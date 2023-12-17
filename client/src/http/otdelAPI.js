@@ -12,3 +12,8 @@ export const getOtdel = async () => {
     const {data} = await $host.get('api/otdel/getAll')
     return data
 }
+
+export const getOneOtdel = async (id) => {
+    const {data} = await $host.post('api/otdel/getOne',{id})
+    return data
+}

@@ -28,7 +28,7 @@ class OtdelController {
     }
 
     async getOne(req,res) {
-        const {id} = req.params
+        const {id} = req.body
         const otdel = await Otdel.findOne({where:{id}})
      return res.json(otdel)   
     }

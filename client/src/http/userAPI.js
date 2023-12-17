@@ -30,3 +30,8 @@ export const getUsers = async (Otdel_id) => {
     const {data} = await $host.post('api/user/getUsers', {Otdel_id} )
     return data
 }
+
+export const getOneUser = async (id) => {
+    const {data} = await $host.post('api/user/getOne', {id} )
+    return data
+}

@@ -57,12 +57,16 @@ const  setTasks = async (Work_id,User_id,Text,Completed) =>
                             onClick={()=>updTask(workss)}
                         >
                             {workss.Text}
+                            {work.selectedWork.id === workss.id?
                             <Button className="align-items-baseline"
                                 variant="outline-success"
                                 size="sm"
                                 onClick={()=>setTasks(work.selectedWork.id,token,"Новая задача",false)}>
                                 Добавить задачу
                             </Button>
+                            :
+                            <small >Выбирете проект, что бы посмотреть задачи</small>    
+                        }
                         </ListGroup.Item>
 
                         <ListGroup.Item 

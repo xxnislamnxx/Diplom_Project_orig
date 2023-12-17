@@ -94,7 +94,17 @@ class UserController {
             return next(ApiError.badRequest(e))
         }
     }
-
+    async getOne(req,res,next) {
+        try {
+            const {id} = req.body
+            const user = await User.findOne({
+                attributes: ['id','Name','Login','Otdel_id','PostId'],
+                where: {id}})
+            return res.json(user)
+        } catch (e) {
+            return next(ApiError.badRequest(e))
+        }
+    }
 }
 
 module.exports = new UserController()

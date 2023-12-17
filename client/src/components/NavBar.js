@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Context } from '../index.js'
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
@@ -9,16 +9,19 @@ import {Button} from 'react-bootstrap'
 import {observer} from 'mobx-react-lite'
 import {useHistory} from "react-router-dom/cjs/react-router-dom";
 import {jwtDecode} from "jwt-decode";
+import { getOneOtdel } from '../http/otdelAPI.js'
 
 
  const NavBar = observer(()  => {
     const {user} = useContext(Context)
     const {otdel} = useContext(Context)
     const history = useHistory()
-    const token = jwtDecode(localStorage.getItem('token')).Name
-    {/*const otdels = async () => {
-      otdel.setSelectedOtdel
-    }*/}
+    const token = jwtDecode(localStorage.getItem('token'))
+    
+    useEffect(() => {
+      getOneOtdel(token.Otdel_id).then(data => otdel.setOneOtdel(data))
+  }, [])
+  
     const logOut =() => {
     user.setUser({})
     user.setIsAuth(false)
@@ -35,7 +38,7 @@ import {jwtDecode} from "jwt-decode";
                 className="d-flex align-items-center"
                 style={{marginRight: "20px"}}
                 >
-                  {token}</label>
+                  {token.Name} | {otdel.OneOtdel.Name}</label>
 
               <Button 
                 variant={"outline-light"} 
