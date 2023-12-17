@@ -1,10 +1,10 @@
 import React from "react";
 import {Button, Form, Modal} from 'react-bootstrap'
-const CreateOtdel = (show,onHide) => {
+const CreateOtdel = ({show,onHide}) => {
     return (
         <Modal
         size="sm"
-        show={false}
+        show={show}
         onHide={onHide}
         centered
         aria-labelledby="example-modal-sizes-title-sm"

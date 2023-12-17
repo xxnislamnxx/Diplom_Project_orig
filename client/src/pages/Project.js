@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {Card, Container,Button, Row,Col } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
@@ -7,6 +7,9 @@ import { getTask, getWork,setWork } from "../http/workApi";
 import {jwtDecode} from "jwt-decode";
 import {useHistory} from "react-router-dom/cjs/react-router-dom";
 import { LOGIN_ROUTE, PROJECT_ROUTE, USERLIST_ROUTE } from '../utils/consts.js'
+import CreateOtdel from "../components/modals/CreateOtdel.js";
+import CreateWork from "../components/modals/CreateWork.js";
+import CreateTask from "../components/modals/CreateTask.js";
 
 
 const Project = observer(() => {
@@ -14,6 +17,9 @@ const Project = observer(() => {
     const {user} = useContext(Context)
     const {work} = useContext(Context)
     const history = useHistory()
+    const [WorkVisible,setWorkVisible] = useState(false)
+
+
 
    const token = jwtDecode(localStorage.getItem('token')).Otdel_id
    useEffect(() => {
@@ -22,26 +28,18 @@ const Project = observer(() => {
 
    
 
-    const  setWorks = async (Otdel_id,Text,Completed) => 
-    {
-        try {
-            await setWork(Otdel_id,Text,Completed)
-            history.push(PROJECT_ROUTE)
-        } catch (e) {
-            alert(e.response.data.message)
-        }
-    }
 
     return (
         <Container>
             <Row className="justify-content-md-center mt-4">
                 <Col md={6}>
                     <div>    
-                        {console.log(jwtDecode(localStorage.getItem('token')))}
+                        
                         <WorkBar/>
                         <Button className="align-items-baseline mt-2"
                             variant="outline-success"
-                            onClick={()=>setWorks(token,"Новый проект",false)}
+                            onClick={()=> setWorkVisible(true)
+                                /*setWorks(token,"Новый проект",false)*/}
                             >
                             Создать проект
                         </Button>
@@ -50,7 +48,8 @@ const Project = observer(() => {
                 
             </Row>
 
-
+            <CreateWork show={WorkVisible} onHide={()=> setWorkVisible(false)} />
+            
         </Container>
     )
 
