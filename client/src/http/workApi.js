@@ -21,12 +21,12 @@ export const updTask = async (id,Completed) => {
 }
 
 /*------------*/
-export const delWork = async (Otdel_id) => {
-    const {data} = await $host.post('api/work/delWork',{Otdel_id})
+export const delWork = async (Work_id) => {
+    const {data} = await $host.put('api/work/delWork',{Work_id})
     return data
 }
-export const delTask = async (Otdel_id) => {
-    const {data} = await $host.post('api/work/delWork',{Otdel_id})
+export const delTask = async (Work_id) => {
+    const {data} = await $host.put('api/work/delWork',{Work_id})
     return data
 }
 

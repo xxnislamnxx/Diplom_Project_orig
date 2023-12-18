@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {Button, Form, Modal} from 'react-bootstrap'
-import { setWork } from "../../http/workApi";
+import { delWork, getWork, setWork } from "../../http/workApi";
 import {jwtDecode} from "jwt-decode";
+import { Context } from "../..";
 
 
 const DeleteWork = ({show,onHide}) => {
     const token = jwtDecode(localStorage.getItem('token'))
     const [value,setValue] = useState('')
-    
-    const  delWork = async () => 
+    const {work} = useContext(Context)
+    const  delWorks = async () => 
     {
         try {
-            await setWork(token.Otdel_id,value,0)
-            
+            await delWork(work.selectedWork.id)
+            getWork(token.Otdel_id).then(data => work.setWorks(data))
         } catch (e) {
             alert(e.response.data.message)
         }
@@ -31,15 +32,11 @@ const DeleteWork = ({show,onHide}) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <Form>
-                <Form.Control 
-                value={value}
-                onChange={e=> setValue(e.target.value)}
-                    placeholder="Подтвердите удаления проекта"/>
-            </Form>
+            <label>Подтвердите удаления проекта
+            </label>
         </Modal.Body>
         <Modal.Footer>
-            <Button variant="outline-success" onClick={delWork}>Удалить</Button>
+            <Button variant="outline-success" onClick={delWorks}>Удалить</Button>
             <Button variant="outline-danger" onClick={onHide}>Закрыть</Button>
         </Modal.Footer>
       </Modal>

@@ -43,8 +43,9 @@ let check = null
                                 onClick={e=>isCompleted(tasks.id,e.target.checked)}
                                 disabled={tasks.User_id==token.id? false:true}
                         />
-                        <small className="">!!!
-                            {"Автор:"+ user.users.find(({id})=>id===tasks.User_id).Name}
+                        <small className="">
+                            {tasks.Text ==="В проекте нет задач, для создания обратитесь к руководителю"?
+                            "":"Автор: "+ user.users.find(({id})=>id===tasks.User_id).Name}
                         </small>
                         </div>
                     </ListGroup.Item>

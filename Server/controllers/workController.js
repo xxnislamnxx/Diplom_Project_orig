@@ -57,7 +57,7 @@ class workController {
         const {Work_id} = req.body
         const work = await WorkList.destroy({where:{id:Work_id}})
         const task = await TaskList.destroy({where:{Work_id}})
-        return next(ApiError.internal('Удаление прошло успешно'))
+        return res.json('Удаление прошло успешно')
         } catch (e) {
             console.log(e)
             return next(ApiError.badRequest('Возникла непредвиденная ошибка'))
@@ -68,7 +68,7 @@ class workController {
         try {
         const {Otdel_id} = req.body
         const task = await TaskList.destroy({where:{Work_id}})
-        return next(ApiError.internal('Удаление прошло успешно'))
+        return res.json('Удаление прошло успешно')
         } catch (e) {
             console.log(e)
             return next(ApiError.badRequest('Возникла непредвиденная ошибка'))
