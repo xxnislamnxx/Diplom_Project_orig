@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {Card, Container,Button, Row,Col } from "react-bootstrap";
 import OtdelBar from "../components/OtdelBar";
 import UsersBar from "../components/UsersBar";
@@ -16,6 +16,8 @@ import TaskBar from "../components/TaskBar";
 const UserList = observer(() => {
     const {otdel} = useContext(Context)
     const {user} = useContext(Context)
+    const [OtdelVisible,setOtdelVisible] = useState(false)
+
     let onHidden = true
 
     useEffect(() => {
@@ -45,9 +47,9 @@ const UserList = observer(() => {
                         <OtdelBar/>
                         <Button className="align-items-baseline mt-3"
                             variant="outline-success"
-                            onClick={click}
+                            onClick={()=>setOtdelVisible(true)}
                             >
-                            Что то сделать
+                            Создать отдел
                         </Button>
                     </div> 
                 </Col>
@@ -61,14 +63,9 @@ const UserList = observer(() => {
                         <UsersBar onHidden={onHidden}/>
                     </div> 
                 </Col>
-                <Col md="auto">
-                    <div>    
-                        <TaskBar onHidden={onHidden}/>
-                    </div> 
-                </Col>
             </Row>
 
-
+        <CreateOtdel show={OtdelVisible} onHide={()=> setOtdelVisible(false)}/>
         </Container>
     )
 

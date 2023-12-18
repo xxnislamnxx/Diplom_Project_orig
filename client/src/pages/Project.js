@@ -23,22 +23,20 @@ const Project = observer(() => {
     const [DelWorkVisible,setDelWorkVisible] = useState(false)
 
 
-   const token = jwtDecode(localStorage.getItem('token')).Otdel_id
+   const token = jwtDecode(localStorage.getItem('token'))
+   console.log(token)
    useEffect(() => {
-        getWork(token).then(data => work.setWorks(data))
-        getUsers(token).then(data => user.setUsers(data))
+        getWork(token.Otdel_id).then(data => work.setWorks(data))
+        getUsers(token.Otdel_id).then(data => user.setUsers(data))
     }, [])
-
-   
-
-
     return (
         <Container>
             <Row className="justify-content-md-center mt-4">
-                <Col md={8}>
-                    <div>    
-                        
+                <Col md={8}>        
                         <WorkBar/>
+                        <div 
+                        hidden={token.PostId !== 1}
+                        >         
                         <Button className="align-items-baseline mt-2"
                             variant="outline-success"
                             onClick={()=> setWorkVisible(true)

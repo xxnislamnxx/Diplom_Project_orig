@@ -36,13 +36,9 @@ import { getOneOtdel } from '../http/otdelAPI.js'
 
               <label 
                 className="d-flex align-items-center"
-                style={{marginRight: "20px"}}
+                style={{marginRight: "10px"}}
                 >
                   {token.Name} | {otdel.OneOtdel.Name}</label>
-
-              <Button 
-                variant={"outline-light"} 
-                onClick={() => history.push(ADMIN_ROUTE)}>Админ панель</Button>
               <Button 
                 variant={"outline-light"} 
                 style={{marginLeft: "20px"}}

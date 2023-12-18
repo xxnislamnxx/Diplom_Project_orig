@@ -8,15 +8,17 @@ import { Context } from './index.js';
 import { check } from './http/userAPI.js';
 import { Spinner } from 'react-bootstrap';
 import Project from './pages/Project.js';
+import { jwtDecode } from 'jwt-decode';
 
 const App = observer( () => {
   const {user} = useContext(Context)
   const [loading, setLoading] = useState(true)
-
+  const token = jwtDecode(localStorage.getItem('token'))
   useEffect( () => {
       check().then(data => {
-        user.setUser(true)
+        user.setUser(user)
         user.setIsAuth(true)
+        user.setRole(token.Role)
       }).finally(() => setLoading(false))
     }, [])
 

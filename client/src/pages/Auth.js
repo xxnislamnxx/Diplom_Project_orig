@@ -43,11 +43,15 @@ const Auth = observer(() => {
        }
     }
 
-
     
     useEffect(() => {
         getOtdel().then(data => otdel.setOtdel(data))
     }, [])
+
+    const getid = async (Namee) => 
+    {
+        setOtdel_id(otdel.otdels.find(({Name})=>Name===Namee).id)
+    }
 
     //console.log(location)
     return (
@@ -83,11 +87,11 @@ const Auth = observer(() => {
                         onChange={e => setName(e.target.value)}
                     />
                     <Form.Select className="mt-3"
-                        onChange={e => setOtdel_id(e.target.options.selectedIndex)}
+                        onChange={e => getid(e.target.value) /*setOtdel_id(e.target.options.selectedIndex)*/}
                     >
-                        <option>Укажите отдел</option>
+                        <option key={0}>Укажите отдел</option>
                         {otdel.otdels.map(otdell => 
-                            <option 
+                            <option
                                 key={otdell.id}
                             >
                                 {otdell.Name}

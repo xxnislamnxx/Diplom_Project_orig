@@ -13,7 +13,7 @@ const WorkBar = observer(() => {
     const {user} = useContext(Context)
     const {work} = useContext(Context)
     const [TaskVisible,setTaskVisible] = useState(false)
-    const token = jwtDecode(localStorage.getItem('token')).id
+    
     let onHidden = true
 
     if (work.selectedWork.id) {  

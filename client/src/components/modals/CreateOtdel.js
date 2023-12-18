@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import {Button, Form, Modal} from 'react-bootstrap'
+import { createOtdel } from "../../http/otdelAPI";
+
+
 const CreateOtdel = ({show,onHide}) => {
+    const [value,setValue] = useState('')
+    
+    const  addOtdel = async () => 
+    {
+        try {
+            await createOtdel(value, null)
+        } catch (e) {
+            alert(e.response.data.message)
+        }
+    }
+
     return (
         <Modal
         size="sm"
@@ -17,16 +31,18 @@ const CreateOtdel = ({show,onHide}) => {
         <Modal.Body>
             <Form>
                 <Form.Control 
+                    value={value}
+                    onChange={e=> setValue(e.target.value)}
                     placeholder="Введите название отдела"/>
             </Form>
         </Modal.Body>
         <Modal.Footer>
-            <Button onClick={onHide}>Добавить</Button>
-            <Button onClick={onHide}>Закрыть</Button>
+            <Button variant="outline-success" onClick={addOtdel}>Добавить</Button>
+            <Button variant="outline-danger" onClick={onHide}>Закрыть</Button>
         </Modal.Footer>
       </Modal>
 
     )
 
-}
+  }
 export default CreateOtdel;
