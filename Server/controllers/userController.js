@@ -62,11 +62,9 @@ class UserController {
     }
 
     async getAll (req,res,next){
-
         try {
             const users = await User.findAll(
                 {   
-                    
                     attributes: ['id','Name','Login','Role','Otdel_id','PostId']
                 })
             return res.json(users)
