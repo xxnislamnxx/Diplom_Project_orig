@@ -23,8 +23,8 @@ import { getOneOtdel } from '../http/otdelAPI.js'
   }, [])
   
     const logOut =() => {
-    user.setUser({})
-    user.setIsAuth(false)
+      user.setUser({})
+      user.setIsAuth(false)
     }
     return (
       
