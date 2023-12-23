@@ -10,6 +10,7 @@ import CreateOtdel from "../components/modals/CreateOtdel";
 import DirectoBar from "../components/DirectorBar";
 import WorkBar from "../components/WorkBar";
 import TaskBar from "../components/TaskBar";
+import { jwtDecode } from "jwt-decode";
 
 
 
@@ -17,6 +18,7 @@ const UserList = observer(() => {
     const {otdel} = useContext(Context)
     const {user} = useContext(Context)
     const [OtdelVisible,setOtdelVisible] = useState(false)
+    const token = jwtDecode(localStorage.getItem('token'))
 
     let onHidden = true
 
@@ -43,15 +45,15 @@ const UserList = observer(() => {
         <Container>
             <Row className="justify-content-md-center mt-4">
                 <Col md={2}>
-                    <div>    
-                        <OtdelBar/>
-                        <Button className="align-items-baseline mt-3"
-                            variant="outline-success"
-                            onClick={()=>setOtdelVisible(true)}
-                            >
-                            Создать отдел
-                        </Button>
-                    </div> 
+                    <OtdelBar/>
+                        <div hidden={token.PostId !== 1}>    
+                            <Button className="align-items-baseline mt-3"
+                                variant="outline-success"
+                                onClick={()=>setOtdelVisible(true)}
+                                >
+                                Создать отдел
+                            </Button>
+                        </div> 
                 </Col>
                 <Col md="auto">
                     <div>

@@ -34,23 +34,21 @@ const Project = observer(() => {
             <Row className="justify-content-md-center mt-4">
                 <Col md={8}>        
                         <WorkBar/>
-                        <div 
-                        hidden={token.PostId !== 1}
-                        >         
-                        <Button className="align-items-baseline mt-2"
-                            variant="outline-success"
-                            onClick={()=> setWorkVisible(true)
-                                /*setWorks(token,"Новый проект",false)*/}
-                            >
-                            Создать проект
-                        </Button>
-                        <Button className="align-items-baseline mt-2"
-                            variant="outline-danger"
-                            onClick={()=> setDelWorkVisible(true)}
-                            style={{marginLeft: "20px"}}
-                            >
-                            Удалить проект
-                        </Button>
+                        <div hidden={token.PostId !== 1}>         
+                            <Button className="align-items-baseline mt-2"
+                                variant="outline-success"
+                                onClick={()=> setWorkVisible(true)
+                                    /*setWorks(token,"Новый проект",false)*/}
+                                >
+                                Создать проект
+                            </Button>
+                            <Button className="align-items-baseline mt-2"
+                                variant="outline-danger"
+                                onClick={()=> setDelWorkVisible(true)}
+                                style={{marginLeft: "20px"}}
+                                >
+                                Удалить проект
+                            </Button>
                     </div> 
                 </Col>
                 
