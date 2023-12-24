@@ -54,7 +54,7 @@ const CreateTask = ({show,onHide}) => {
                 <Form.Select className=""
                   style={{marginLeft: "50px"}}
                   disabled={token.PostId !==1}
-                  onChange={e => getid(e.target.value)}
+                  
                 >
                 <option key={0}>{token.Name}</option>
                 </Form.Select>
@@ -62,7 +62,7 @@ const CreateTask = ({show,onHide}) => {
                 <Form.Select className=""
                   style={{marginLeft: "50px"}}
                   disabled={token.PostId !==1}
-                  onChange={e => getid(e.target.value)}
+                  
                 >
                 <option key={0}>Укажите пользователя</option>
                 {user.users.map(userss => 
