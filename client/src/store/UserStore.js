@@ -5,6 +5,8 @@ export default class UserStore {
         this._isAuth = false
         this._user = {}
         this._role = ''
+        this._token = [{id:0,Name:'Гость',Login:'',Role:'Guest',PostId:0,Otdel_id:0}]
+        
         makeAutoObservable(this)
     }
     setRole(role) {
@@ -16,7 +18,9 @@ export default class UserStore {
 
     setUsers(users) {
         this._users = users}
-
+    
+    setToken(token) {
+        return this._token = token}
     get isAuth() {
        return this._isAuth}
     get user() {
@@ -27,6 +31,8 @@ export default class UserStore {
 
     get role() {
     return  this._role}
-        
-
+    
+    get token() {
+    return this._token
+    }
 }

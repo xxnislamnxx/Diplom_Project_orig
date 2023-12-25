@@ -25,6 +25,7 @@ import { getOneOtdel } from '../http/otdelAPI.js'
     const logOut =() => {
       user.setUser({})
       user.setIsAuth(false)
+      history.push(LOGIN_ROUTE)
     }
     return (
       
@@ -38,7 +39,8 @@ import { getOneOtdel } from '../http/otdelAPI.js'
                 className="d-flex align-items-center"
                 style={{marginRight: "10px"}}
                 >
-                  {/*token.Name*/} | {otdel.OneOtdel.Name}</label>
+                  {user.token[0].Name} | {otdel.OneOtdel.Name}
+                </label>
               <Button 
                 variant={"outline-light"} 
                 style={{marginLeft: "20px"}}

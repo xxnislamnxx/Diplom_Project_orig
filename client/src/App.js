@@ -14,18 +14,21 @@ import Admin from './pages/Admin.js';
 const App = observer( () => {
   const {user} = useContext(Context)
   const [loading, setLoading] = useState(true)
-  const tok = localStorage.getItem('token')
+  
+  const tok = localStorage.getItem('token')  
+  let token
   if (!tok) {
-    console.log("пустой токен ",tok)
+     token = user.token[0]
+    //console.log("токен дефолт ",token.Name)
   }else{
-    const token = jwtDecode(tok)
-    console.log("токен получен ",tok,token)
+    token = jwtDecode(tok)
+    console.log("токен дефолт ",token.Name)
   }
   useEffect( () => {
       check().then(data => {
         user.setUser(user)
         user.setIsAuth(true)
-        //user.setRole(token.Role)
+        user.setRole(token.Role)
       }).finally(() => setLoading(false))
     }, [])
 
