@@ -9,16 +9,23 @@ import { check } from './http/userAPI.js';
 import { Spinner } from 'react-bootstrap';
 import Project from './pages/Project.js';
 import { jwtDecode } from 'jwt-decode';
+import Admin from './pages/Admin.js';
 
 const App = observer( () => {
   const {user} = useContext(Context)
   const [loading, setLoading] = useState(true)
-  const token = jwtDecode(localStorage.getItem('token'))
+  const tok = localStorage.getItem('token')
+  if (!tok) {
+    console.log("пустой токен ",tok)
+  }else{
+    const token = jwtDecode(tok)
+    console.log("токен получен ",tok,token)
+  }
   useEffect( () => {
       check().then(data => {
         user.setUser(user)
         user.setIsAuth(true)
-        user.setRole(token.Role)
+        //user.setRole(token.Role)
       }).finally(() => setLoading(false))
     }, [])
 
@@ -26,6 +33,7 @@ const App = observer( () => {
     return <Spinner animation={'grow'}/>
     
   }
+  
 
   return (
       <BrowserRouter>

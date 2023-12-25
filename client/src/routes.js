@@ -33,5 +33,9 @@ export const publicRoutes = [
         path: PROJECT_ROUTE,
         Component: Project
     }
+    ,{
+        path: ADMIN_ROUTE,
+        Component: Admin
+    },
 
 ]

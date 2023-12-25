@@ -16,11 +16,11 @@ import { getOneOtdel } from '../http/otdelAPI.js'
     const {user} = useContext(Context)
     const {otdel} = useContext(Context)
     const history = useHistory()
-    const token = jwtDecode(localStorage.getItem('token'))
+    /*const token = jwtDecode(localStorage.getItem('token'))
     
     useEffect(() => {
       getOneOtdel(token.Otdel_id).then(data => otdel.setOneOtdel(data))
-  }, [])
+  }, [])*/
   
     const logOut =() => {
       user.setUser({})
@@ -38,7 +38,7 @@ import { getOneOtdel } from '../http/otdelAPI.js'
                 className="d-flex align-items-center"
                 style={{marginRight: "10px"}}
                 >
-                  {token.Name} | {otdel.OneOtdel.Name}</label>
+                  {/*token.Name*/} | {otdel.OneOtdel.Name}</label>
               <Button 
                 variant={"outline-light"} 
                 style={{marginLeft: "20px"}}

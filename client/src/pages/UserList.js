@@ -19,7 +19,7 @@ const UserList = observer(() => {
     const {user} = useContext(Context)
     const [OtdelVisible,setOtdelVisible] = useState(false)
     const token = jwtDecode(localStorage.getItem('token'))
-
+    console.log(token)
     let onHidden = true
 
     useEffect(() => {
