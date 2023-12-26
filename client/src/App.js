@@ -22,11 +22,11 @@ const App = observer( () => {
     //console.log("токен дефолт ",token.Name)
   }else{
     token = jwtDecode(tok)
-    console.log("токен дефолт ",token.Name)
+    console.log("токен есть ",token.Name)
   }
   useEffect( () => {
       check().then(data => {
-        user.setUser(user)
+        user.setUser(true)
         user.setIsAuth(true)
         user.setRole(token.Role)
       }).finally(() => setLoading(false))

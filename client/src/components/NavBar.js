@@ -16,6 +16,15 @@ import { getOneOtdel } from '../http/otdelAPI.js'
     const {user} = useContext(Context)
     const {otdel} = useContext(Context)
     const history = useHistory()
+    const tok = localStorage.getItem('token')  
+    let token
+    if (!tok) {
+       token = user.token[0]
+      //console.log("токен дефолт ",token.Name)
+    }else{
+      token = jwtDecode(tok)
+      console.log("токен дефолт ",token.Name)
+    }
     /*const token = jwtDecode(localStorage.getItem('token'))
     
     useEffect(() => {
@@ -39,7 +48,7 @@ import { getOneOtdel } from '../http/otdelAPI.js'
                 className="d-flex align-items-center"
                 style={{marginRight: "10px"}}
                 >
-                  {user.token[0].Name} | {otdel.OneOtdel.Name}
+                  {token.Name} | {otdel.OneOtdel.Name}
                 </label>
               <Button 
                 variant={"outline-light"} 

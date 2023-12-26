@@ -13,17 +13,22 @@ const CreateTask = ({show,onHide}) => {
     const [User_id,setUser_id] = useState('')
     const {work} = useContext(Context)
     const {user} = useContext(Context)
-    const  addTask = async (user_name) => 
+    
+    const  addTask = async () => 
     {
         try {
-            await user.users.find( ({Name})=>Name===user_name).id
-            await setTask(work.selectedWork.id,token.id,value,false)
+            await setTask(work.selectedWork.id,User_id,value,false)
             await getTask(work.selectedWork.id).then(data => work.setTask(data))
         } catch (e) {
-            alert(e.response.data.message)
+            console.log(e)
         }
     }
-    
+   const getid = async (user_name) => 
+    {
+        await setUser_id(user.users.find( ({Name})=>Name===user_name).id)
+        
+    }
+
     useEffect(() => {
       getUsers(token.Otdel_id).then(data => user.setUsers(data))
   }, [])
@@ -54,7 +59,7 @@ const CreateTask = ({show,onHide}) => {
                 <Form.Select className=""
                   style={{marginLeft: "50px"}}
                   disabled={token.PostId !==1}
-                  
+                 onChange={e => getid(e.target.value)}
                 >
                 <option key={0}>{token.Name}</option>
                 </Form.Select>
@@ -62,7 +67,7 @@ const CreateTask = ({show,onHide}) => {
                 <Form.Select className=""
                   style={{marginLeft: "50px"}}
                   disabled={token.PostId !==1}
-                  
+                  onChange={e => getid(e.target.value)}
                 >
                 <option key={0}>Укажите пользователя</option>
                 {user.users.map(userss => 
