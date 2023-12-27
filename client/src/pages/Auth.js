@@ -29,7 +29,6 @@ const Auth = observer(() => {
             data = await login(Login,Password)
             const token = jwtDecode(localStorage.getItem('token'))
             getOneOtdel(token.Otdel_id).then(data => otdel.setOneOtdel(data))
-            console.log(data)
         } else {
             data = await registration(Name,Login,Password,Otdel_id)
             const token = jwtDecode(localStorage.getItem('token'))

@@ -27,7 +27,6 @@ const UserList = observer(() => {
   }else{
     token = jwtDecode(tok)
   }
-    console.log(token)
     let onHidden = true
 
     useEffect(() => {
