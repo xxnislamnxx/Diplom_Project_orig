@@ -55,7 +55,7 @@ const  setTasks = async (Work_id,User_id,Text,Completed) =>
                                 align-items-center
                                 list-group-item-action"
                             style={{ cursor: 'pointer' }}
-                            key={workss.id}
+                            key={workss.id+1}
                             onClick={()=>updTask(workss)}
                             >
                             {workss.Text}
@@ -63,6 +63,7 @@ const  setTasks = async (Work_id,User_id,Text,Completed) =>
                                 <Button className="align-items-baseline"
                                     variant="outline-success"
                                     size="sm"
+                                    key={workss.id+5}
                                     onClick={()=> setTaskVisible(true)}>
                                     Добавить задачу
                                 </Button>
@@ -74,7 +75,7 @@ const  setTasks = async (Work_id,User_id,Text,Completed) =>
                         <ListGroup.Item 
                             hidden={onHidden}
                             style={{marginLeft: "20px"}}
-                            key={index}>
+                            key={workss.id+10}>
                                 
                         <TaskBar Work_id={workss.id}/>
                         </ListGroup.Item>

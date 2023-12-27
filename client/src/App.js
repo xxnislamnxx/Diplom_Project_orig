@@ -22,7 +22,6 @@ const App = observer( () => {
     //console.log("токен дефолт ",token.Name)
   }else{
     token = jwtDecode(tok)
-    console.log("токен есть ",token.Name)
   }
   useEffect( () => {
       check().then(data => {

@@ -9,7 +9,6 @@ import {Button} from 'react-bootstrap'
 import {observer} from 'mobx-react-lite'
 import {useHistory} from "react-router-dom/cjs/react-router-dom";
 import {jwtDecode} from "jwt-decode";
-import { getOneOtdel } from '../http/otdelAPI.js'
 
 
  const NavBar = observer(()  => {
@@ -23,7 +22,6 @@ import { getOneOtdel } from '../http/otdelAPI.js'
       //console.log("токен дефолт ",token.Name)
     }else{
       token = jwtDecode(tok)
-      console.log("токен дефолт ",token.Name)
     }
     /*const token = jwtDecode(localStorage.getItem('token'))
     
