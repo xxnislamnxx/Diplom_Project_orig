@@ -17,18 +17,22 @@ const App = observer( () => {
   
   const tok = localStorage.getItem('token')  
   let token
-  if (!tok) {
-     token = user.token[0]
-    //console.log("токен дефолт ",token.Name)
-  }else{
-    token = jwtDecode(tok)
-  }
+  
   useEffect( () => {
-      check().then(data => {
-        user.setUser(true)
-        user.setIsAuth(true)
-        user.setRole(token.Role)
-      }).finally(() => setLoading(false))
+    if (!tok) {
+      token = user.token[0]
+      setLoading(false)
+     //console.log("токен дефолт ",token.Name)
+   }else{
+     token = jwtDecode(tok)
+     check().then(data => {
+        
+      user.setUser(true)
+      user.setIsAuth(true)
+      user.setRole(token.Role)
+    }).finally(() => setLoading(false))
+   }
+      
     }, [])
 
   if (loading) {
