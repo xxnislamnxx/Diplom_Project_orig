@@ -7,7 +7,7 @@ import {observer} from 'mobx-react-lite'
 import { Context } from '../index.js'
 import { getOneOtdel, getOtdel } from "../http/otdelAPI";
 import {jwtDecode} from "jwt-decode";
-
+import { Link } from "react-router-dom";
 const Auth = observer(() => {
     const {user} = useContext(Context)
     const {otdel} = useContext(Context)
@@ -37,6 +37,7 @@ const Auth = observer(() => {
         user.setUser(user)
         user.setIsAuth(true)
         history.push(USERLIST_ROUTE)
+        //location.reload(true);
        } catch (e) {
         alert(e.response.data.message)
        }

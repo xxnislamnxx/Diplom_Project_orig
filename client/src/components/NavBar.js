@@ -18,15 +18,21 @@ import { getOneOtdel } from '../http/otdelAPI.js'
     const history = useHistory()
     const tok = localStorage.getItem('token')  
     let token
-    if (!tok) {
-       token = user.token[0]
-      //console.log("токен дефолт ",token.Name)
-    }else{
-      token = jwtDecode(tok)
-      useEffect(() => {
-        getOneOtdel(token.Otdel_id).then(data => otdel.setOneOtdel(data))
-    }, [])
-    }
+
+    useEffect(() => {
+      if (!user.isAuth) {
+        token = user.token[0]
+        console.log("не авторизован",token.Name)
+        otdel.setOneOtdel([{Name:''}])
+     }else{
+       token = jwtDecode(tok)
+       console.log("авторизован",token.Name)
+       getOneOtdel(token.Otdel_id).then(data => otdel.setOneOtdel(data))
+     }
+      
+  }, [])
+
+    
     /*const token = jwtDecode(localStorage.getItem('token'))
     
     */
@@ -34,6 +40,7 @@ import { getOneOtdel } from '../http/otdelAPI.js'
     const logOut =() => {
       user.setUser({})
       user.setIsAuth(false)
+      localStorage.removeItem("token")
       history.push(LOGIN_ROUTE)
     }
     return (
@@ -48,7 +55,7 @@ import { getOneOtdel } from '../http/otdelAPI.js'
                 className="d-flex align-items-center"
                 style={{marginRight: "10px"}}
                 >
-                  {token.Name} | {otdel.OneOtdel.Name}
+                  {(jwtDecode(localStorage.getItem('token')).Name)} | {otdel.OneOtdel.Name}
                 </label>
               <Button 
                 variant={"outline-light"} 

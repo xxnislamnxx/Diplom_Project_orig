@@ -26,7 +26,6 @@ const App = observer( () => {
    }else{
      token = jwtDecode(tok)
      check().then(data => {
-        
       user.setUser(true)
       user.setIsAuth(true)
       user.setRole(token.Role)
