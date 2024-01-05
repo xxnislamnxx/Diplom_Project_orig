@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Form from 'react-bootstrap/Form';
@@ -6,15 +6,25 @@ import InputGroup from 'react-bootstrap/InputGroup';
 
 import Comment from './Comment';
 import './Sidebar.css';
+import { Context } from '../..';
 
 
-const Sidebar = ({show,onHide}) => {
+const Sidebar = ({show,onHide,TaskName,CreatedTask,TimeTask}) => {
   //const [show, setShow] = useState(false);
-/*
-  const {user} = useContext(Context)
-  const {work} = useContext(Context)
-*/
 
+  const {user} = useContext(Context)
+  let UserCreate
+  let UserDate  
+  let UserTime
+if (show) {
+   UserCreate = user.users.find(({id})=>id===CreatedTask).Name
+   UserDate = TimeTask.toString().substr(0,10)
+   UserTime = TimeTask.toString().split('T')[1].split('.')[0]
+   
+   console.log(UserDate,'|||',UserTime)
+//2024-01-06 02:10:49.3830000 +00:00
+}
+  
   const taskData = {
     username: 'Islam',
     title: 'Task 1',
@@ -30,15 +40,16 @@ const Sidebar = ({show,onHide}) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 */
+
   return (
     <>
       <Offcanvas show={show} onHide={onHide}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>{taskData.title}</Offcanvas.Title>
+          <Offcanvas.Title>{TaskName}</Offcanvas.Title>
         </Offcanvas.Header>
         <div className='task__description'>
-          <p>created by <strong>{taskData.username}</strong></p>
-          <p>{taskData.date}</p>
+          <p>Автор: <strong>{UserCreate}</strong></p>
+          <p>Создан: <strong>{UserDate + ' '+UserTime}</strong></p>
         </div>
         <Offcanvas.Body className='comments__list'>
           {comments.map(({ id, title, username }) => (<Comment comment={title} username={username} />))}

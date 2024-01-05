@@ -47,7 +47,7 @@ const CommentList = sequelize.define('CommentList',
     Task_id:{type: DataTypes.INTEGER },
     User_id:{type: DataTypes.INTEGER },
     Text:{type: DataTypes.TEXT},
-    DateTimeChange:{type: DataTypes.DATE, defaultValue: DataTypes.NOW},
+    DateTimeChange:{type: DataTypes.DATE(6), defaultValue: DataTypes.NOW},
 },{timestamps: false})
 
 // 1 ко многим

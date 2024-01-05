@@ -15,17 +15,24 @@ const TaskBar = observer(({Work_id,isHidden}) => {
 
 const [Check,setCheck] = useState()
 const [CommentVisible,setCommentVisible] = useState(false)
+const [TaskName,setTaskName] = useState('')
+const [CreatedTask,setCreatedTask] = useState('')
+const [TimeTask,setTimeTask] = useState('')
+const [Userid,setUserid] = useState('')
 let check = null
     const isCompleted = async (id,checkedd)=>
     {
         updTask(id,checkedd).then(
         getTask(work.selectedWork.id).then(data => work.setTask(data)))
     }
-    const isSel = async (id) =>
+    const isSel = async (id,taskName,createdTask,timeTask,userid) =>
     {
         await work.setSelectedTask(id)
+        setTaskName(taskName)
+        setCreatedTask(createdTask)
+        setTimeTask(timeTask.toString())
+        setUserid(userid)
         setCommentVisible(true)
-        console.log(id)
     }
     return (
         <div hidden={!hid}>
@@ -36,7 +43,7 @@ let check = null
                     <ListGroup.Item className="d-flex list-group-item-action justify-content-between"
                         style={{cursor: 'pointer'}}
                         key={tasks.id}
-                        onClick={()=>isSel(tasks.id)}
+                        onClick={()=>isSel(tasks.id,tasks.Text,tasks.User_id,tasks.DateTimeCreate)}
                         >
                             
                         {tasks.Text}
@@ -61,7 +68,9 @@ let check = null
                 )}
             </ListGroup>
             
-            <Sidebar show={CommentVisible} onHide={()=> setCommentVisible(false)}/>
+            <Sidebar show={CommentVisible} onHide={()=> setCommentVisible(false)}
+                TaskName={TaskName} CreatedTask={CreatedTask} TimeTask={TimeTask}
+            />
         </div>
 
     )
