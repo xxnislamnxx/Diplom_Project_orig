@@ -78,7 +78,7 @@ class workController {
     async getWork(req,res,next) {
         try {
             const {Otdel_id} = req.body
-            const text = [{id:1 ,Text:'В отделе нет проектов, для создания проекат обратитесь к руководителю'}]
+            const text = [{id:0 ,Text:'В отделе нет проектов, для создания проекат обратитесь к руководителю'}]
             const work = await WorkList.findAll({where:{Otdel_id}})
             if (work.length === 0) {
                 return res.json(text)          
@@ -92,7 +92,7 @@ class workController {
     async getTask(req,res,next) {
             try {
                 const {Work_id} = req.body
-                const text = [{id:1 ,Text:'В проекте нет задач, для создания обратитесь к руководителю'}]
+                const text = [{id:0 ,Text:'В проекте нет задач, для создания обратитесь к руководителю'}]
                 const task = await TaskList.findAll({where:{Work_id}})
                 if (task.length === 0) {
                     return res.json(text)          

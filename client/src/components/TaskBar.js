@@ -5,6 +5,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { getTask, updTask } from "../http/workApi";
 import { Col, Form, Row } from "react-bootstrap";
 import { jwtDecode } from "jwt-decode";
+import Sidebar from "./SideBar/Sidebar";
 
 const TaskBar = observer(({Work_id,isHidden}) => {
     const {user} = useContext(Context)
@@ -13,13 +14,19 @@ const TaskBar = observer(({Work_id,isHidden}) => {
     const token = jwtDecode(localStorage.getItem('token'))
 
 const [Check,setCheck] = useState()
+const [CommentVisible,setCommentVisible] = useState(false)
 let check = null
     const isCompleted = async (id,checkedd)=>
     {
         updTask(id,checkedd).then(
         getTask(work.selectedWork.id).then(data => work.setTask(data)))
     }
-
+    const isSel = async (id) =>
+    {
+        await work.setSelectedTask(id)
+        setCommentVisible(true)
+        console.log(id)
+    }
     return (
         <div hidden={!hid}>
             
@@ -29,7 +36,9 @@ let check = null
                     <ListGroup.Item className="d-flex list-group-item-action justify-content-between"
                         style={{cursor: 'pointer'}}
                         key={tasks.id}
+                        onClick={()=>isSel(tasks.id)}
                         >
+                            
                         {tasks.Text}
                         <div
                             hidden={tasks.Text ==="В проекте нет задач, для создания обратитесь к руководителю"}
@@ -45,14 +54,14 @@ let check = null
                         />
                         <small className="" aria-disabled={tasks.User_id==token.id? false:true}>
                             {tasks.Text ==="В проекте нет задач, для создания обратитесь к руководителю"?
-                            "":"Автор: "}
+                            "":"Автор: "+ user.users.find( ({id})=>id===tasks.User_id).Name}
                         </small>
                         </div>
                     </ListGroup.Item>
                 )}
             </ListGroup>
             
-            
+            <Sidebar show={CommentVisible} onHide={()=> setCommentVisible(false)}/>
         </div>
 
     )

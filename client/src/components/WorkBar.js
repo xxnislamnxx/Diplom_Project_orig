@@ -15,8 +15,9 @@ const WorkBar = observer(() => {
     const [TaskVisible,setTaskVisible] = useState(false)
     
     let onHidden = true
-
-    if (work.selectedWork.id) {  
+    
+    if (work.selectedWork.id ) {  
+       
         onHidden = false
     }
 
@@ -64,11 +65,13 @@ const  setTasks = async (Work_id,User_id,Text,Completed) =>
                                     variant="outline-success"
                                     size="sm"
                                     key={workss.id+5}
+                                    hidden={workss.id ===0}
                                     onClick={()=> setTaskVisible(true)}>
                                     Добавить задачу
                                 </Button>
                             :
-                                <small >Выбирете проект, что бы посмотреть задачи</small>    
+                                <small hidden={workss.id ===0}
+                                >Выбирете проект, что бы посмотреть задачи</small>    
                             }   
                         </ListGroup.Item>
 

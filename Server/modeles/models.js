@@ -1,4 +1,5 @@
 //Тут объявляется таблицы в базе данных
+const { MAX } = require('mssql')
 const sequelize = require('../db')
 const {DataTypes} = require('sequelize')
 
@@ -37,8 +38,17 @@ const TaskList = sequelize.define('TaskList',
     User_id:{type: DataTypes.INTEGER },
     Text:{type: DataTypes.STRING(100)},
     Completed:{type: DataTypes.BOOLEAN, defaultValue: false},
+    DateTimeCreate:{type: DataTypes.DATE, defaultValue: DataTypes.NOW},
 },{timestamps: false})
 
+const CommentList = sequelize.define('CommentList', 
+{
+    id:{type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    Task_id:{type: DataTypes.INTEGER },
+    User_id:{type: DataTypes.INTEGER },
+    Text:{type: DataTypes.TEXT},
+    DateTimeChange:{type: DataTypes.DATE, defaultValue: DataTypes.NOW},
+},{timestamps: false})
 
 // 1 ко многим
 Otdel.hasMany(User, {sourceKey: 'id',foreignKey: 'Otdel_id'})
@@ -46,4 +56,4 @@ WorkList.hasMany(TaskList, {sourceKey: 'id',foreignKey: 'Work_id'})
 
 
 
-module.exports = {User,Otdel,WorkList,TaskList}
+module.exports = {User,Otdel,WorkList,TaskList,CommentList}
