@@ -6,6 +6,7 @@ import { getTask, updTask } from "../http/workApi";
 import { Col, Form, Row } from "react-bootstrap";
 import { jwtDecode } from "jwt-decode";
 import Sidebar from "./SideBar/Sidebar";
+import { getComments } from "../http/commentApi";
 
 const TaskBar = observer(({Work_id,isHidden}) => {
     const {user} = useContext(Context)
@@ -25,14 +26,15 @@ let check = null
         updTask(id,checkedd).then(
         getTask(work.selectedWork.id).then(data => work.setTask(data)))
     }
-    const isSel = async (id,taskName,createdTask,timeTask,userid) =>
+    const isSel = async (id,taskName,userid,timeTask) =>
     {
         await work.setSelectedTask(id)
         setTaskName(taskName)
-        setCreatedTask(createdTask)
-        setTimeTask(timeTask.toString())
         setUserid(userid)
-        setCommentVisible(true)
+        setTimeTask(timeTask.toString())
+        await getComments(work.selectedTask).then(data => work.setComments(data))
+         setCommentVisible(true)
+        
     }
     return (
         <div hidden={!hid}>
@@ -69,7 +71,7 @@ let check = null
             </ListGroup>
             
             <Sidebar show={CommentVisible} onHide={()=> setCommentVisible(false)}
-                TaskName={TaskName} CreatedTask={CreatedTask} TimeTask={TimeTask}
+                TaskName={TaskName} Userid={Userid} TimeTask={TimeTask}
             />
         </div>
 
