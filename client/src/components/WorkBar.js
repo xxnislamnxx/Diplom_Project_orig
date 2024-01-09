@@ -44,9 +44,7 @@ const  setTasks = async (Work_id,User_id,Text,Completed) =>
 
     return (
         <div>
-            <div>
-                Список проектов:
-            </div>
+            
             <ListGroup className="mt-3 list-group-flush">
                 {work.works.map((workss,index) => 
                     <>
