@@ -60,12 +60,20 @@ import { getOneOtdel } from '../http/otdelAPI.js'
               <Button 
                 variant={"outline-light"} 
                 style={{marginLeft: "20px"}}
-                onClick={() => history.push(PROJECT_ROUTE)}>Проекты</Button>
+                onClick={() => history.push(PROJECT_ROUTE)}>Анализ
+              </Button>
 
               <Button 
                 variant={"outline-light"} 
                 style={{marginLeft: "20px"}}
-                onClick={() => logOut()}>Выйти</Button>
+                onClick={() => history.push(PROJECT_ROUTE)}>Проекты
+              </Button>
+
+              <Button 
+                variant={"outline-light"} 
+                style={{marginLeft: "20px"}}
+                onClick={() => logOut()}>Выйти
+              </Button>
                 
             </Nav>
             :

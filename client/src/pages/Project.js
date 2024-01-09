@@ -32,7 +32,7 @@ const Project = observer(() => {
     return (
         <Container>
             <Row className="justify-content-md-center mt-4">
-                <Col md={8}>     
+                <Col md={11}>     
                     <div className="d-flex justify-content-between">
                        <label>Список проектов:</label> 
                        <label> Сортировка: </label>
