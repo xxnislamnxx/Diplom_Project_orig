@@ -91,13 +91,15 @@ class workController {
     }
     async getTask(req,res,next) {
             try {
-                const {Work_id,Sort} = req.body
+                const {Work_id,Sort,Dir} = req.body
                 const text = [{id:0 ,Text:'В проекте нет задач, для создания обратитесь к руководителю'}]
                 const sort = Sort|| "id"
+                const dir = Dir || "ASC"
+                console.log('asdsadadasdadsaad- ',sort)
                 const task = await TaskList.findAll({
                     where:{Work_id},
                     order:[
-                        [Completed,'DESC']
+                        [`${sort}`,`${dir}`]
                     ]
                 })
                 if (task.length === 0) {
