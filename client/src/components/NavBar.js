@@ -47,7 +47,7 @@ import { getOneOtdel } from '../http/otdelAPI.js'
       
       <Navbar bg="dark" data-bs-theme="dark">
         <Container >
-          <NavLink style={{color: 'white'}} to={USERLIST_ROUTE}>My Project</NavLink> 
+        <Navbar.Brand href={USERLIST_ROUTE}>Задачник</Navbar.Brand>
           {user.isAuth ?
             <Nav className="mr-2" style={{color:'white'}}>
 

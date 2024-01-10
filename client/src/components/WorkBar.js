@@ -13,38 +13,45 @@ const WorkBar = observer(() => {
     const {user} = useContext(Context)
     const {work} = useContext(Context)
     const [TaskVisible,setTaskVisible] = useState(false)
+    const [WorkVisible,setWorkVisible] = useState(false)
+    const [Select,setSelect] = useState({})
+    let onHidden=true 
     
-    let onHidden = true
-    
-    if (work.selectedWork.id ) {  
-       
+    if (!WorkVisible) { 
+        onHidden = true
+    }
+    else{
         onHidden = false
+        console.log('Проект не выбран',onHidden)
     }
 
 const  updTask = async (works) => 
     {
         try {
-            {work.setSelectedWork(works)}
-            if (work.selectedWork.id) {
-                getTask(work.selectedWork.id).then(data => work.setTask(data))    
-            }   
+            work.setSelectedWork(works)
+                if (Select.id===work.selectedWork.id) {
+                    onHidden = true
+                    setWorkVisible(false)
+                    setSelect({})
+                    console.log('Выбран тот же проект',onHidden)
+                 } else {
+                    work.setSelectedWork(works)
+                    setWorkVisible(true)
+                    setSelect(works)
+                    onHidden = false
+                    if (work.selectedWork.id) 
+                    {
+                        getTask(work.selectedWork.id).then(data => work.setTask(data))
+                    } 
+                    onHidden = false
+                    console.log('Выбран другой проект',onHidden)
+                 }              
     } catch (e) {
         alert(e.response.data.message)
     }
 }
-
-const  setTasks = async (Work_id,User_id,Text,Completed) => 
-{
-    try {
-        await setTask(Work_id,User_id,Text,Completed) 
-    } catch (e) {
-        alert(e.response.data.message)
-    }
-}
-
     return (
         <div>
-            
             <ListGroup className="mt-3 list-group-flush">
                 {work.works.map((workss,index) => 
                     <>
@@ -58,13 +65,13 @@ const  setTasks = async (Work_id,User_id,Text,Completed) =>
                             onClick={()=>updTask(workss)}
                             >
                             {workss.Text}
-                            {work.selectedWork.id === workss.id?
+                            {Select.id === workss.id?
                                 <Button className="align-items-baseline"
                                     variant="outline-success"
                                     size="sm"
-                                    key={workss.id+5}
-                                    hidden={workss.id ===0}
-                                    onClick={()=> setTaskVisible(true)}>
+                                    key={workss.id + 5}
+                                    hidden={workss.id === 0}
+                                    onClick={() => setTaskVisible(true)}>
                                     Добавить задачу
                                 </Button>
                             :
@@ -77,8 +84,8 @@ const  setTasks = async (Work_id,User_id,Text,Completed) =>
                             hidden={onHidden}
                             style={{marginLeft: "20px"}}
                             key={workss.id+10}>
-                                
-                        <TaskBar Work_id={workss.id}/>
+                        {WorkVisible?
+                        <TaskBar Work_id={workss.id}/>:''}
                         </ListGroup.Item>
                     </>
                 )}

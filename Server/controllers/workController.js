@@ -91,9 +91,15 @@ class workController {
     }
     async getTask(req,res,next) {
             try {
-                const {Work_id} = req.body
+                const {Work_id,Sort} = req.body
                 const text = [{id:0 ,Text:'В проекте нет задач, для создания обратитесь к руководителю'}]
-                const task = await TaskList.findAll({where:{Work_id}})
+                const sort = Sort|| "id"
+                const task = await TaskList.findAll({
+                    where:{Work_id},
+                    order:[
+                        [Completed,'DESC']
+                    ]
+                })
                 if (task.length === 0) {
                     return res.json(text)          
                 }else{
