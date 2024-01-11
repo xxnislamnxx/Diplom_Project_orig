@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min.js'
-import { ADMIN_ROUTE, LOGIN_ROUTE, PROJECT_ROUTE, USERLIST_ROUTE } from '../utils/consts.js'
+import { ADMIN_ROUTE, LOGIN_ROUTE, PROJECT_ROUTE, STATISTICS_ROUTE, USERLIST_ROUTE } from '../utils/consts.js'
 import {Button} from 'react-bootstrap'
 import {observer} from 'mobx-react-lite'
 import {useHistory} from "react-router-dom/cjs/react-router-dom";
@@ -60,7 +60,7 @@ import { getOneOtdel } from '../http/otdelAPI.js'
               <Button 
                 variant={"outline-light"} 
                 style={{marginLeft: "20px"}}
-                onClick={() => history.push(PROJECT_ROUTE)}>Анализ
+                onClick={() => history.push(STATISTICS_ROUTE)}>Анализ
               </Button>
 
               <Button 

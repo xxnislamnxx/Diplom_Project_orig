@@ -1,69 +1,116 @@
 import React, { useContext, useEffect, useState } from "react";
-import {Card, Container,Button, Row,Col, Dropdown, DropdownButton } from "react-bootstrap";
+import {Button, Dropdown, DropdownButton, Row,Col } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
-import WorkBar from "../components/WorkBar";
-import { getTask, getWork,setWork } from "../http/workApi";
-import {jwtDecode} from "jwt-decode";
 import {useHistory} from "react-router-dom/cjs/react-router-dom";
-import { LOGIN_ROUTE, PROJECT_ROUTE, USERLIST_ROUTE } from '../utils/consts.js'
-import CreateOtdel from "../components/modals/CreateOtdel.js";
-import CreateWork from "../components/modals/CreateWork.js";
-import CreateTask from "../components/modals/CreateTask.js";
-import { getUsers } from "../http/userAPI.js";
-import DeleteWork from "../components/modals/DeleteWork.js";
+
 import '../components/SideBar/Sidebar.css';
+import { getTask } from "../http/workApi";
 
 
-const SortBar = observer(() => {
+const SortBar = observer(({onHide}) => {
     const {otdel} = useContext(Context)
     const {user} = useContext(Context)
     const {work} = useContext(Context)
     const history = useHistory()
-    const [WorkVisible,setWorkVisible] = useState(false)
-    const [DelWorkVisible,setDelWorkVisible] = useState(false)
     const [Sort,setSort] = useState('')
     const [Filter,setFilter] = useState('')
+    const [Dir,setDir] = useState(true)
+    const [DirValue,setDirValue] = useState('')
+    let text = '▼▲'
 
-   const token = jwtDecode(localStorage.getItem('token'))
-   console.log(token)
-   useEffect(() => {
-        getWork(token.Otdel_id).then(data => work.setWorks(data))
-        getUsers(token.Otdel_id).then(data => user.setUsers(data))
-    }, [])
-    const isSort = async (text)=>
+    const isSort = async (text,textt)=>
     {
-        setSort(text)
+        work.setSortCol(text)
+        setSort(textt)
+        if (work.SortDir) {
+            setDirValue('ASC')
+        } else {
+            setDirValue('DESC')
+        }
+        getTask(work.selectedWork.id,work.SortCol,work.SortDir).then(data => work.setTask(data))
+
+        
     }
-    const isFilter = async (text)=>
+    const isFilter = async (text,textt)=>
     {
-        setFilter(text)
+        setFilter(textt)
+    }
+    
+    const isDir = async (dir)=>
+    {
+        setDir(!dir)
+        if (dir) {
+            work.setSortDir('ASC')
+        } else {
+            work.setSortDir('DESC')
+        }
+    }
+    
+    if (Dir) {
+        text='▼'
+
+    } else {
+        text = '▲'
+
     }
     return ( 
-        <div className="d-flex align-items-center"> 
-            <label className="ml-1" style={{marginRight: "3px", marginLeft: "10px"}}>Сортировка: </label>
+        <><div
+        hidden={onHide}
+        ><div className="d-flex align-items-center">
+            <label className="ml-1" style={{ marginRight: "3px", marginLeft: "10px" }}>Сортировка: </label>
             <DropdownButton
                 id="nav-dropdown-dark-example"
-                title={'по '+ Sort}
+                title={'по ' + Sort}
                 variant="dark">
-                    <Dropdown.ItemText className='sort__line'>Сортировка:</Dropdown.ItemText>
-                    <Dropdown.Item as="button"
-                    onClick={()=>isSort('Времени создания')}>Времени создания</Dropdown.Item>
-                    <Dropdown.Item as="button"
-                    onClick={()=>isSort('Выполненым задачам')}>Выполненым задачам</Dropdown.Item>
+                <Row>
+                    <Col>
+                        <Dropdown.ItemText className='sort__line'>Сортировка:
+                            <Button
+                                variant="outline-secondary"
+                                size="sm"
+                                className="mt-1"
+                                style={{ marginLeft: '5px' }}
+                                onClick={() => isDir(Dir)}
+                            >{text}</Button>
+                        </Dropdown.ItemText>
+
+                        <Dropdown.Item as="button"
+                            onClick={() => isSort('DateTimeCreate', 'Времени создания')}>Времени создания</Dropdown.Item>
+                        <Dropdown.Item as="button"
+                            onClick={() => isSort('Completed', 'Выполненым задачам')}>Выполненым задачам
+
+                        </Dropdown.Item>
+                    </Col>
+                </Row>
+
+                <Button
+                    variant="outline-secondary"
+                    size="sm"
+                    className="mt-1"
+                    style={{ marginLeft: '60px' }}
+                    onClick={() => isSort('', '')}
+                >Очистить</Button>
             </DropdownButton>
-            <label className="ml-1" style={{marginRight: "3px", marginLeft: "10px"}}>Фильтрация:</label>
+            <label className="ml-1" style={{ marginRight: "3px", marginLeft: "10px" }}>Фильтрация:</label>
             <DropdownButton
                 id="nav-dropdown-dark-example"
-                title={ Filter}
+                title={Filter}
                 variant="dark">
-                    <Dropdown.ItemText className='sort__line'>Фильтрация:</Dropdown.ItemText>
-                    <Dropdown.Item as="button"
-                    onClick={()=>isFilter('Мои задачи')}>Мои задачи</Dropdown.Item>
-                    <Dropdown.Item as="button"
-                    onClick={()=>isFilter('Показать все')}>Показать все</Dropdown.Item>
+                <Dropdown.ItemText className='sort__line'>Фильтрация:</Dropdown.ItemText>
+                <Dropdown.Item as="button"
+                    onClick={() => isFilter('Мои задачи')}>Мои задачи</Dropdown.Item>
+                <Dropdown.Item as="button"
+                    onClick={() => isFilter('Показать все')}>Показать все</Dropdown.Item>
+                <Button
+                    variant="outline-secondary"
+                    size="sm"
+                    className="mt-1"
+                    style={{ marginLeft: '45px' }}
+                    onClick={() => isFilter('', '')}
+                >Очистить</Button>
             </DropdownButton>
-        </div>
+        </div></div></>
 
 
 )})

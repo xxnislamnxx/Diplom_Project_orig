@@ -24,7 +24,8 @@ let check = null
     const isCompleted = async (id,checkedd)=>
     {
         updTask(id,checkedd).then(
-        getTask(work.selectedWork.id).then(data => work.setTask(data)))
+        getTask(work.selectedWork.id,work.SortCol,work.SortDir).then(data => work.setTask(data)))
+
     }
     const isSel = async (id,taskName,userid,timeTask) =>
     {

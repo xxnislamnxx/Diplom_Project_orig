@@ -41,7 +41,8 @@ const  updTask = async (works) =>
                     onHidden = false
                     if (work.selectedWork.id) 
                     {
-                        getTask(work.selectedWork.id).then(data => work.setTask(data))
+                        getTask(work.selectedWork.id,work.SortCol,work.SortDir).then(data => work.setTask(data))
+                        
                     } 
                     onHidden = false
                     console.log('Выбран другой проект',onHidden)

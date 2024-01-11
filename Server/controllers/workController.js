@@ -95,7 +95,6 @@ class workController {
                 const text = [{id:0 ,Text:'В проекте нет задач, для создания обратитесь к руководителю'}]
                 const sort = Sort|| "id"
                 const dir = Dir || "ASC"
-                console.log('asdsadadasdadsaad- ',sort)
                 const task = await TaskList.findAll({
                     where:{Work_id},
                     order:[

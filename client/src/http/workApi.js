@@ -35,7 +35,7 @@ export const getWork = async (Otdel_id) => {
     const {data} = await $host.post('api/work/WorkList',{Otdel_id})
     return data
 }
-export const getTask = async (Work_id) => {
-    const {data} = await $host.post('api/work/TaskList',{Work_id})
+export const getTask = async (Work_id,Sort,Dir) => {
+    const {data} = await $host.post('api/work/TaskList',{Work_id,Sort,Dir})
     return data
 }
