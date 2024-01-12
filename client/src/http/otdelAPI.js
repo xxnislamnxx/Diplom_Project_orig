@@ -1,8 +1,8 @@
 import { $authHost, $host } from "./index";
 
 
-export const createOtdel = async (Name, Director_Id) => {
-    const {data} = await $authHost.post('api/otdel', {Name, Director_Id})
+export const createOtdel = async (Name) => {
+    const {data} = await $authHost.post('api/otdel', {Name})
     return data
 }
 /*

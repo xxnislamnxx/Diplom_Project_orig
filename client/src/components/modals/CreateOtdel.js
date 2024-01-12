@@ -9,7 +9,7 @@ const CreateOtdel = ({show,onHide}) => {
     const  addOtdel = async () => 
     {
         try {
-            await createOtdel(value, null)
+            await createOtdel(value)
         } catch (e) {
             alert(e.response.data.message)
         }

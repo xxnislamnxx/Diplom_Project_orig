@@ -18,7 +18,7 @@ const Otdel = sequelize.define('Otdel',
 {
     id:{type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     Name:{type: DataTypes.STRING(100) },
-    Director_Id:{type: DataTypes.INTEGER },
+    
     DateTimeChange:{type: DataTypes.DATE, defaultValue: DataTypes.NOW},
 },{timestamps: false})
 
@@ -28,6 +28,8 @@ const WorkList = sequelize.define('WorkList',
     Otdel_id:{type: DataTypes.INTEGER },
     Text:{type: DataTypes.STRING(100) },
     Completed:{type: DataTypes.BOOLEAN, defaultValue: false},
+    DateTimeCreate:{type: DataTypes.DATE, defaultValue: DataTypes.NOW},
+    DateTimeEnd:{type: DataTypes.DATE},
 },{timestamps: false})
 
 
@@ -39,6 +41,7 @@ const TaskList = sequelize.define('TaskList',
     Text:{type: DataTypes.STRING(100)},
     Completed:{type: DataTypes.BOOLEAN, defaultValue: false},
     DateTimeCreate:{type: DataTypes.DATE, defaultValue: DataTypes.NOW},
+    DateTimeEnd:{type: DataTypes.DATE},
 },{timestamps: false})
 
 const CommentList = sequelize.define('CommentList', 

@@ -1,6 +1,7 @@
 //логика 
 const {WorkList,TaskList, User, Otdel} = require('../modeles/models')
 const ApiError = require('../error/ApiError')
+const {DataTypes} = require('sequelize')
 
 class workController {
     async setWork(req,res,next) {
@@ -44,7 +45,16 @@ class workController {
     async updTask(req,res,next) {
         try {
         const {id,Completed} = req.body
-        const task = await TaskList.update({Completed},{where:{id}})
+        let task
+        if (Completed) {
+            const now=new Date()
+            task = await TaskList.update({Completed,DateTimeEnd:now},{where:{id}})
+
+            console.log('DateTimeEnd:',now)
+        } else {
+            task = await TaskList.update({Completed,DateTimeEnd:null},{where:{id}})
+        }
+   
         return res.json(task)
         } catch (e) {
             console.log(e)

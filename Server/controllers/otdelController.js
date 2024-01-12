@@ -4,8 +4,8 @@ const ApiError = require('../error/ApiError')
 
 class OtdelController {
     async create(req,res) {
-        const {Name,Director_Id} = req.body
-        const otdel = await Otdel.create({Name, Director_Id})
+        const {Name} = req.body
+        const otdel = await Otdel.create({Name})
         return res.json(otdel)
     }
     

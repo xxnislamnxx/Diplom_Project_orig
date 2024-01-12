@@ -42,11 +42,14 @@ let check = null
             
                 
             <ListGroup className="mt-0 list-group-flush">
-                {work.task.map(tasks => 
+                {work.task.map(tasks =>     
                     <ListGroup.Item className="d-flex list-group-item-action justify-content-between"
                         style={{cursor: 'pointer'}}
                         key={tasks.id}
-                        onClick={()=>isSel(tasks.id,tasks.Text,tasks.User_id,tasks.DateTimeCreate)}
+                        on
+                        onClick={e=>{
+                            e.stopPropagation();
+                            isSel(tasks.id,tasks.Text,tasks.User_id,tasks.DateTimeCreate)}}
                         >
                             
                         {tasks.Text}
@@ -59,7 +62,9 @@ let check = null
                                 id={tasks.id}
                                 label={tasks.Completed?"Выполнено":"Не выполнено"}
                                 checked={tasks.Completed}
-                                onClick={e=>isCompleted(tasks.id,e.target.checked)}
+                                onClick={e=>{
+                                        e.stopPropagation();
+                                    isCompleted(tasks.id,e.target.checked)}}
                                 disabled={tasks.User_id==token.id? false:true}
                         />
                         <small className="" aria-disabled={tasks.User_id==token.id? false:true}>
