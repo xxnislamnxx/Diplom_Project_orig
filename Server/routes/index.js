@@ -4,9 +4,10 @@ const userRouter = require('./userRouter')
 const otderlRouter = require('./otderlRouter')
 const workRouter = require('./workRouter')
 const commentRouter = require('./commentRouter')
-
+const StatisticsRouter = require('./StatisticsRouter')
 router.use('/user', userRouter)
 router.use('/otdel', otderlRouter)
 router.use('/work',workRouter)
 router.use('/comment',commentRouter)
+router.use('/Statistics',StatisticsRouter)
 module.exports = router
