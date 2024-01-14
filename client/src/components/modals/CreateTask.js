@@ -20,7 +20,7 @@ const CreateTask = ({show,onHide}) => {
             await setTask(work.selectedWork.id,User_id,value,false)
             await getTask(work.selectedWork.id).then(data => work.setTask(data))
         } catch (e) {
-            console.log(e)
+          alert(e.response.data.message)
         }
     }
    const getid = async (user_name) => 

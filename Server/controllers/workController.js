@@ -35,6 +35,10 @@ class workController {
             if (!workCheck) {
                 return next(ApiError.badRequest('Отдела с таким ID не существует'))
             }
+            const userCheck = await User.findOne({where:{id:User_id}})
+            if (!userCheck) {
+                return next(ApiError.badRequest('Пользователь с таким именем не существует'))
+            }
             const task = await TaskList.create({Work_id,User_id,Text,Completed})
             return res.json(task)
         } catch (e) {
