@@ -68,7 +68,7 @@ const SortBar = observer(({onHide}) => {
                         <Dropdown.ItemText className='sort__line'>Сортировка:
                             <Button
                                 variant="outline-secondary"
-                                size="sm"
+                                // size="sm"
                                 className="mt-1"
                                 style={{ marginLeft: '5px' }}
                                 onClick={() => isDir(Dir)}

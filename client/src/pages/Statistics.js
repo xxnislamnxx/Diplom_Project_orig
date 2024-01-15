@@ -6,9 +6,11 @@ import { allProject, allTask, currentWork, detailProject, detailTask, userInfo }
 import { jwtDecode } from "jwt-decode";
 
 import '../components/styles/Statistics.css'
+import { getOtdel } from "../http/otdelAPI";
 
 const Statistics = observer(() => {
     const {statistics} = useContext(Context)
+    const {otdel} = useContext(Context)
     const token = jwtDecode(localStorage.getItem('token'))
     const [workVisible,setworkVisible] = useState(false)
     const [taskVisible,setTaskVisible] = useState(false)
@@ -18,6 +20,7 @@ const Statistics = observer(() => {
     const [TaskDateEnd,setTaskDateEnd] = useState('')  
  
     useEffect(() => {
+        getOtdel().then(data => otdel.setOtdel(data))
         userInfo(token.Otdel_id).then(data => statistics.setUserInfo(data))
         allProject(token.Otdel_id).then(data => statistics.setAllProject(data))
         detailProject(token.Otdel_id).then(data => statistics.setDetailProject(data))
@@ -54,8 +57,28 @@ const Statistics = observer(() => {
         <Button hidden={true}>
             Печать
         </Button>
+        <div  className="d-flex justify-content-center flex-row">
+            <ListGroup className="d-flex justify-content-center flex-row">
+           <label style={{marginRight:'20px'}}> Выберите отдел!</label>
+                {otdel.otdels.map(otdell => 
+                    <ListGroup.Item 
+                    className="d-flex list-group-item-action"
+                        style={{cursor: 'pointer'}}
+                        active={otdell.id === otdel.selectedOtdel.id}
+                        onClick={() => otdel.setSelectedOtdel(otdell)
+                        }
+                        key={otdell.id}
+                    >
+                        {otdell.Name}
+                    </ListGroup.Item>
+                )}
+            </ListGroup>
+            
+        
+        
+        </div>
         <Container className="d-flex justify-content-center cont">
-            <Col className="col" md={'auto'}>
+            <Col className="coll" md={'auto'}>
                 
                 <label className="line"> Информация о сотрудниках: </label>
                 <div className="line1">В отделе {statistics.userInfo.rows ? statistics.userInfo.count : 'В отделе нет сотрудников'}  сотрудника </div>
@@ -71,7 +94,7 @@ const Statistics = observer(() => {
                         ) : 'В отделе нет сотрудников'}
                 </ListGroup>
             </Col>
-            <Col className="col" md={'auto'}>
+            <Col className="coll" md={'auto'}>
                 <label className="line"> Информация по проектам:</label>
                 <div className="line1">Кол-во созданных проектов: {statistics.allProject.rows ? statistics.allProject.count : 'В отделе нет сотрудников'}</div>
                 <ListGroup className="mt-0 list-group-flush listGroupShadow"
@@ -97,7 +120,7 @@ const Statistics = observer(() => {
         </Container>
         {statistics.currentWork.currentWork?
         <Container className="d-flex justify-content-center cont">
-            <Col md={'auto'} className="col">
+            <Col md={'auto'} className="coll">
                 <label className="line">Подробнее о проекте:</label>
                 <div className="line1">Проект: {statistics.currentWork.currentWork[0].Text}</div>
                 <div className="line1">Создан: {WorkDateCreate} </div>
@@ -106,7 +129,7 @@ const Statistics = observer(() => {
                 <div className="line1"> Задач в проекте: {statistics.currentWork.allTask} / Кол-во выполненых: {statistics.currentWork.complTask}</div>
 
             </Col>
-            <Col className="col" md={'auto'}>
+            <Col className="coll" md={'auto'}>
                 <label className="line" style={{ paddingBottom: '5px' }}>
                     Список задач:
                 </label>
@@ -126,7 +149,7 @@ const Statistics = observer(() => {
                 </ListGroup>
             </Col>
             {statistics.detailTask.workName?
-            <Col  md={'auto'} className="col">
+            <Col  md={'auto'} className="coll">
                 <label className="line">Подробнее о задаче:</label>
                 <div className="line1">Проект: {statistics.detailTask.workName}</div>
                 <div className="line1">Задача: {statistics.detailTask.currentTask.Text}</div>

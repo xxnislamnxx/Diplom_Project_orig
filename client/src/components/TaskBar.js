@@ -69,7 +69,7 @@ let check = null
                         />
                         <small className="" aria-disabled={tasks.User_id==token.id? false:true}>
                             {tasks.Text ==="В проекте нет задач, для создания обратитесь к руководителю"?
-                            "":"Автор: "+ user.users.find( ({id})=>id===tasks.User_id).Name}
+                            "":"Ответственный: "+ user.users.find( ({id})=>id===tasks.User_id).Name}
                         </small>
                         </div>
                     </ListGroup.Item>
