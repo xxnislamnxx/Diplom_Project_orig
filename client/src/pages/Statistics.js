@@ -56,6 +56,7 @@ const Statistics = observer(() => {
         </Button>
         <Container className="d-flex justify-content-center cont">
             <Col className="col" md={'auto'}>
+                
                 <label className="line"> Информация о сотрудниках: </label>
                 <div className="line1">В отделе {statistics.userInfo.rows ? statistics.userInfo.count : 'В отделе нет сотрудников'}  сотрудника </div>
                 <ListGroup className="mt-0 list-group-flush listGroupShadow"
