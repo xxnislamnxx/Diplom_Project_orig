@@ -72,7 +72,8 @@ const  updTask = async (works) =>
                                     size="sm"
                                     key={workss.id + 5}
                                     hidden={workss.id === 0}
-                                    onClick={() => setTaskVisible(true)}>
+                                    onClick={e=>{
+                                        e.stopPropagation(); setTaskVisible(true)}}>
                                     Добавить задачу
                                 </Button>
                             :

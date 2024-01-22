@@ -92,7 +92,7 @@ const SortBar = observer(({onHide}) => {
                     onClick={() => isSort('', '')}
                 >Очистить</Button>
             </DropdownButton>
-            <label className="ml-1" style={{ marginRight: "3px", marginLeft: "10px" }}>Фильтрация:</label>
+            {/* <label className="ml-1" style={{ marginRight: "3px", marginLeft: "10px" }}>Фильтрация:</label>
             <DropdownButton
                 id="nav-dropdown-dark-example"
                 title={Filter}
@@ -109,7 +109,7 @@ const SortBar = observer(({onHide}) => {
                     style={{ marginLeft: '45px' }}
                     onClick={() => isFilter('', '')}
                 >Очистить</Button>
-            </DropdownButton>
+            </DropdownButton> */}
         </div></div></>
 
 

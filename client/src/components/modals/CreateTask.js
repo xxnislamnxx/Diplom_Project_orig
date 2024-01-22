@@ -10,7 +10,7 @@ import { getUsers } from "../../http/userAPI";
 const CreateTask = ({show,onHide}) => {
     const token = jwtDecode(localStorage.getItem('token'))
     const [value,setValue] = useState('')
-    const [User_id,setUser_id] = useState('')
+    const [User_id,setUser_id] = useState(token.id)
     const {work} = useContext(Context)
     const {user} = useContext(Context)
     
@@ -25,8 +25,7 @@ const CreateTask = ({show,onHide}) => {
     }
    const getid = async (user_name) => 
     {
-        await setUser_id(user.users.find( ({Name})=>Name===user_name).id)
-        
+      await setUser_id(user.users.find( ({Name})=>Name===user_name).id)
     }
 
     useEffect(() => {
@@ -59,7 +58,6 @@ const CreateTask = ({show,onHide}) => {
                 <Form.Select className=""
                   style={{marginLeft: "50px"}}
                   disabled={token.PostId !==1}
-                 onChange={e => getid(e.target.value)}
                 >
                 <option key={0}>{token.Name}</option>
                 </Form.Select>
@@ -79,9 +77,9 @@ const CreateTask = ({show,onHide}) => {
               }
               
             </div>  
-            <div className="mt-2 d-flex flex-row-reverse">
+            {/* <div className="mt-2 d-flex flex-row-reverse">
               <Button size="sm">Изменить</Button>
-            </div>
+            </div> */}
         </Modal.Body>
         <Modal.Footer>
             <Button variant="outline-success" onClick={addTask}>Добавить</Button>

@@ -68,8 +68,8 @@ const Sidebar = observer(({show,onHide,TaskName,Userid,TimeTask}) => {
           <Form.Control
           value={value}
           onChange={e=>setValue(e.target.value)}
-            placeholder="Recipient's username"
-            aria-label="Recipient's username"
+            placeholder="Введите комментарий"
+            aria-label="Введите комментарий"
             aria-describedby="basic-addon2"
           />
           <Button 

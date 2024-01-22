@@ -57,7 +57,8 @@ const Statistics = observer(() => {
         <Button hidden={true}>
             Печать
         </Button>
-        <div  className="d-flex justify-content-center flex-row">
+        {/* <div  className="d-flex justify-content-center flex-row"
+            hidden={true}>
             <ListGroup className="d-flex justify-content-center flex-row">
            <label style={{marginRight:'20px'}}> Выберите отдел!</label>
                 {otdel.otdels.map(otdell => 
@@ -73,10 +74,7 @@ const Statistics = observer(() => {
                     </ListGroup.Item>
                 )}
             </ListGroup>
-            
-        
-        
-        </div>
+        </div> */}
         <Container className="d-flex justify-content-center cont">
             <Col className="coll" md={'auto'}>
                 
