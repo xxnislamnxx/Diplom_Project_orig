@@ -8,7 +8,7 @@ export const registration = async (Name, Login, Password,Otdel_id) => {
          Login,
          Password,
          Role: 'Admin',
-         PostId: 2,
+         PostId: 1,
          Otdel_id})
     localStorage.setItem('token', data.token)
     return jwtDecode(data.token)
