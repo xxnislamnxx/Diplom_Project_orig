@@ -23,6 +23,9 @@ app.use(errorHandler)
 app.get('/', (req,res) => {
     res.status(200).json({message:'Working!!!'})
 })
+app.get("/", function(req, res) {
+    res.send("Hello Worlxxxxd!")
+})
 
 //app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
 const start = async () => {
