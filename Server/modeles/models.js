@@ -53,10 +53,20 @@ const CommentList = sequelize.define('CommentList',
     DateTimeChange:{type: DataTypes.DATE(6), defaultValue: DataTypes.NOW},
 },{timestamps: false})
 
+
+const Notification = sequelize.define('Notification', 
+{
+    id:{type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    Task_id:{type: DataTypes.INTEGER },
+    Comment_id:{type: DataTypes.INTEGER },
+    Work_id:{type: DataTypes.INTEGER },
+    Text:{type: DataTypes.STRING(40)},
+    DateTimeCreate:{type: DataTypes.DATE(6), defaultValue: DataTypes.NOW},
+},{timestamps: false})
 // 1 ко многим
 Otdel.hasMany(User, {sourceKey: 'id',foreignKey: 'Otdel_id'})
 WorkList.hasMany(TaskList, {sourceKey: 'id',foreignKey: 'Work_id'})
 
 
 
-module.exports = {User,Otdel,WorkList,TaskList,CommentList}
+module.exports = {User,Otdel,WorkList,TaskList,CommentList,Notification}
