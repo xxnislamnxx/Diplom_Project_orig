@@ -92,8 +92,11 @@ const start = async () => {
                   // Print data 
                   .then(response => { 
                      const { id, Name } = response.data 
-                     console.log(response.data ) 
-                }) 
+                     console.log(response.data )
+                     response.data.forEach((item,index) => {
+                        console.log(`Отдел: ${item.Name}`)
+                     });
+                })  
             console.log('Удалось ') 
         } catch (e) {
             console.log(e)
