@@ -28,49 +28,31 @@ const bot = new TelegramBot(API_KEY_BOT, {
 bot.on('text', async msg => {
 
     const msgWait = await bot.sendMessage(msg.chat.id, `Бот генерирует ответ...`);
-
+    let arr = [] // Для проучения массива
+    let str = '' // Для сохранеия массива в строку
     setTimeout(async () => {
-
-        // await bot.editMessageText(getAll(), {
-
-        //     chat_id: msgWait.chat.id,
-        //     message_id: msgWait.message_id
-            
-        // });
         try {
-            var text
             await axios.get( 
                 'http://localhost:5000/api/otdel/getAll') 
-                  
-                      // Print data 
-                      .then(response => { 
-                         //const { id, Name } = response.data 
-                        //  console.log(response.data ) 
-                         //text = response.data 
-                         console.log(response.text ) 
+                    .then(response => { 
+                        response.data.forEach((item,index) => {
+                    //--------Парсим в строку--------//
+                            arr.push(item.Name)
+                            str = arr.join(', ')
+                         });
+
                     }) 
-        await bot.sendMessage(text          
-            
-            , {
-            chat_id: msgWait.chat.id,
-            message_id: msgWait.message_id
-            
-        });
+                    console.log(arr)
+        await bot.editMessageText(`Отделы: ${str}`, 
+            {
+                chat_id: msgWait.chat.id,
+                message_id: msgWait.message_id
+            });
         console.log('Удалось ') 
         } catch (e) {
             console.log(e)
             console.log('Не удалось ')  
         }
-
-
-        
-
-        // await bot.editMessageText(msg.text, {
-
-        //     chat_id: msgWait.chat.id,
-        //     message_id: msgWait.message_id
-            
-        // });
     },500);
 
 })

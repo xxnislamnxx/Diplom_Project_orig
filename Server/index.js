@@ -84,24 +84,28 @@ const start = async () => {
         app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
         
         
-        try{
- 
-            axios.get( 
-                'http://localhost:5000/api/otdel/getAll') 
-              
-                  // Print data 
-                  .then(response => { 
-                     const { id, Name } = response.data 
-                     console.log(response.data )
-                     response.data.forEach((item,index) => {
-                        console.log(`Отдел: ${item.Name}`)
-                     });
-                })  
-            console.log('Удалось ') 
-        } catch (e) {
-            console.log(e)
-            console.log('Не удалось ')  
-        }
+        // try{
+        //     let arr=[]
+        //     axios.get( 
+        //         'http://localhost:5000/api/otdel/getAll') 
+                
+        //           // Print data 
+        //           .then(response => { 
+        //              const { id, Name } = response.data 
+        //              console.log(response.data )
+        //              response.data.forEach((item,index) => {
+        //                 console.log(`Отдел: ${item.Name}`)
+        //                 //arr.concat(`Отдел: ${item.Name}`)
+        //                // console.log(arr)
+        //              });
+        //              //console.log(response.data.Name.join())
+        //              //console.log(arr)
+        //         })  
+        //     console.log('Удалось ') 
+        // } catch (e) {
+        //     console.log(e)
+        //     console.log('Не удалось ')  
+        // }
 
 
     } catch (e) {
