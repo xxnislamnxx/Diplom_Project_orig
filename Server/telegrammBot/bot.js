@@ -39,6 +39,7 @@ bot.onText(/\/all_otdels/, async msg => {
                     //--------Парсим в строку--------//
                             arr.push(item.Name)
                             str = arr.join(', ')
+                            console.log(response.data)
                          });
 
                     }) 
