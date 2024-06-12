@@ -24,6 +24,28 @@ const bot = new TelegramBot(API_KEY_BOT, {
       }
     
 });
+
+// const botPsuh = new TelegramBot(API_KEY_BOT, {
+
+//     polling: {
+//         interval: 300,
+//         autoStart: true
+//       }
+    
+// });
+
+const botPush= async ()=> {
+    try {
+        setTimeout(await bot.sendMessage(1696397669, `Я тебе что то хочу отправить...`),100)
+        await bot.sendMessage(1696397669, `Я тебе что то хочу отправить...`)
+        console.log('Удалось ') 
+    } catch (e) {
+        console.log(e)
+        console.log('Не удалось ')  
+    }
+}
+
+// })
 // Список всех отделов //
 bot.onText(/\/all_otdels/, async msg => {
 
@@ -118,5 +140,5 @@ bot.setMyCommands(commands);
 
 
 
-module.exports = bot
+module.exports = {bot,botPush}
 //----//

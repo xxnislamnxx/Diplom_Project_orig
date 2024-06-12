@@ -6,7 +6,8 @@ const cors = require('cors')
 const router = require('./routes/index')
 const errorHandler = require('./middleware/ErrorHandlingMiddleware')
 const TelegramBot = require('node-telegram-bot-api');
-const bot = require('./telegrammBot/bot')
+const {bot,botPush} = require('./telegrammBot/bot')
+//const botPush = require('./telegrammBot/bot')
 const axios = require('axios') 
 
 const PORT = process.env.PORT || 5000
@@ -15,47 +16,11 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 app.use('/api', router)
+//app.use(botPsuh)
+
 //app.use('./telegrammBot/bot',bot)
 //Обработка ошибок, последний Middleware
 app.use(errorHandler)
-
-// axios.get( 
-//     'http://localhost:5000/api/user/getAll') 
-      
-//           // Print data 
-//           .then(response => { 
-//              const { id, Name } = response.data 
-//              console.log(`Name ${id}: ${Name}\n`) 
-//           }) 
-
-// //---Telegram Bot---//
-// const API_KEY_BOT = '6723208789:AAFxcrJrBukKnI6v-GoFjgQMni7uFtfaN7Q';
-
-// const bot = new TelegramBot(API_KEY_BOT, {
-
-//     polling: {
-//         interval: 300,
-//         autoStart: true
-//       }
-    
-// });
-
-// bot.on('text', async msg => {
-
-//     const msgWait = await bot.sendMessage(msg.chat.id, `Бот генерирует ответ...`);
-
-//     setTimeout(async () => {
-
-//         await bot.editMessageText(msg.text, {
-
-//             chat_id: msgWait.chat.id,
-//             message_id: msgWait.message_id
-            
-//         });
-        
-//     },500);
-
-// })
 
 // //----//
 
@@ -109,13 +74,13 @@ const start = async () => {
 
 
     } catch (e) {
-
         console.log(e)
-  
     }
 }
 
 start()
+//botPush()
+
 // команды старта - npm run dev
 // команда установки - npm install [пакет]
 // команда приостановки - Ctrl + C 
